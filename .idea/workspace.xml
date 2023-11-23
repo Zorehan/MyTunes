@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="4fd1ae2c-de71-42e1-a613-ee75e8e52de6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/view/view.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/BE/Song.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/BLL/SongManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DAL/SongDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/Controller/Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/Model/Model.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/view/mainMyTunesView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyTunes.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MyTunes.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +38,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/krame/Desktop/MyTunes",
+    "last_opened_file_path": "C:/Users/kadar/Documents/GitHub/Gergeren/MRS-starter-main",
+    "node.js.selected.package.tslint": "(autodetect)",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
