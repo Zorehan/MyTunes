@@ -5,10 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4fd1ae2c-de71-42e1-a613-ee75e8e52de6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/BE/PlayList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DAL/SongDAO_File.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/view/mainMyTunesView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/view/mainMyTunesView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Controller/mainMyTunesViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BE/PlayList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BE/Playlist.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BE/Song.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BE/Song.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/Controller/mainMyTunesViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Controller/mainMyTunesViewController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +43,8 @@
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
     "last_opened_file_path": "C:/Users/kadar/Documents/GitHub/Gergeren/MRS-starter-main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
@@ -60,6 +64,7 @@
       <workItem from="1700736169676" duration="3000" />
       <workItem from="1700736999985" duration="148000" />
       <workItem from="1700744636271" duration="151000" />
+      <workItem from="1700768437790" duration="1103000" />
     </task>
     <servers />
   </component>

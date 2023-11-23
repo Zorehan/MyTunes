@@ -1,6 +1,6 @@
 package GUI.Controller;
 
-import BE.PlayList;
+import BE.Playlist;
 import BE.Song;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
 public class mainMyTunesViewController implements Initializable
 {
     @FXML
-    private TableView<PlayList> tblPlaylists;
+    private TableView<Playlist> tblPlaylists;
     /*
     Den her vil jeg helst først skrive når vi har databasen så jeg ved
     hvad fuck det skal være med variabler, men umiddelbart:
