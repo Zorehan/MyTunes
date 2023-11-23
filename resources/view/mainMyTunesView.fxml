@@ -8,13 +8,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainMyTunesView">
+<AnchorPane prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.mainMyTunesViewController">
    <children>
       <TableView fx:id="tblPlaylists" layoutX="14.0" layoutY="118.0" prefHeight="313.0" prefWidth="225.0">
         <columns>
-          <TableColumn prefWidth="108.0" text="Name" />
-          <TableColumn prefWidth="41.0" text="Songs" />
-            <TableColumn prefWidth="76.0" text="Time" />
+          <TableColumn fx:id="colName" prefWidth="108.0" text="Name" />
+          <TableColumn fx:id="colSongs" prefWidth="41.0" text="Songs" />
+            <TableColumn fx:id="colTimePlaylist" prefWidth="76.0" text="Time" />
         </columns>
       </TableView>
       <ListView fx:id="lstSongsOnPlaylist" layoutX="250.0" layoutY="118.0" prefHeight="313.0" prefWidth="133.0" />
@@ -34,14 +34,14 @@
       <Button fx:id="btnClose" layoutX="836.0" layoutY="439.0" mnemonicParsing="false" text="Close" />
       <TableView fx:id="tblSongs" layoutX="428.0" layoutY="118.0" prefHeight="313.0" prefWidth="453.0">
         <columns>
-          <TableColumn prefWidth="197.0" text="Title" />
-          <TableColumn prefWidth="129.0" text="Artist" />
-            <TableColumn prefWidth="87.0" text="Category" />
-            <TableColumn prefWidth="39.0" text="Time" />
+          <TableColumn fx:id="colTitle" prefWidth="197.0" text="Title" />
+          <TableColumn fx:id="colArtist" prefWidth="129.0" text="Artist" />
+            <TableColumn fx:id="colCategory" prefWidth="87.0" text="Category" />
+            <TableColumn fx:id="colTimeSongs" prefWidth="39.0" text="Time" />
         </columns>
       </TableView>
       <Label layoutX="691.0" layoutY="22.0" text="Filter:" />
-      <TextField layoutX="730.0" layoutY="18.0" prefHeight="25.0" prefWidth="115.0" />
+      <TextField fx:id="txtSongSearch" layoutX="730.0" layoutY="18.0" prefHeight="25.0" prefWidth="115.0" />
       <Button fx:id="btnSearch" layoutX="859.0" layoutY="18.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="0.0" text="Button" />
    </children>
 </AnchorPane>
