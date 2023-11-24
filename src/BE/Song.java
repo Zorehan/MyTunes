@@ -5,7 +5,7 @@ public class Song {
     private String name;
     private String artist;
 
-    public Song (int id, String name, String artist){
+    public Song (int id, String name, String artist, String category, String filePath, int playTime){
         this.id = id;
         this.name = name;
         this.artist = artist;

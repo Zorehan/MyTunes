@@ -1,3 +1,6 @@
+###Own GitIgnore###
+config/config.settings
+
 ### IntelliJ IDEA ###
 out/
 !**/src/main/**/out/

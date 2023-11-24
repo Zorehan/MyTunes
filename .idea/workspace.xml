@@ -5,12 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4fd1ae2c-de71-42e1-a613-ee75e8e52de6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/DAL/SongDAO_File.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/microsoft_sqlserver_mssql_jdbc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/config.settings" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/config.settingsEXAMPLE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DAL/DataBaseConnector.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DAL/IMyTunesDataAccess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BE/PlayList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BE/Playlist.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BE/Song.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BE/Song.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Controller/mainMyTunesViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Controller/mainMyTunesViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyTunes.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MyTunes.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAL/SongDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/SongDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +25,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -38,17 +43,22 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
     "last_opened_file_path": "C:/Users/kadar/Documents/GitHub/Gergeren/MRS-starter-main",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
@@ -65,6 +75,7 @@
       <workItem from="1700736999985" duration="148000" />
       <workItem from="1700744636271" duration="151000" />
       <workItem from="1700768437790" duration="1103000" />
+      <workItem from="1700848898437" duration="2035000" />
     </task>
     <servers />
   </component>
