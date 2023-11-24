@@ -16,7 +16,8 @@ public class Song {
         men noget vi henter fra mp3 filen, det samme med id som vi bare kan
         incriment på database niveau.
      */
-    public Song (String name, String artist, String category, String filePath){
+    public Song (int id, String name, String artist, String category, String filePath){
+        this.id = id;
         this.name = name;
         this.artist = artist;
         this.category = category;

@@ -56,4 +56,26 @@ public class MyTunesModel {
         allPlaylists.add(p);
         return p;
     }
+
+    public void deleteSong(Song song) throws Exception
+    {
+        songManager.deleteSong(song);
+        allSongs.remove(song);
+    }
+
+    public void deletePlaylist(Playlist playlist) throws Exception
+    {
+        songManager.deletePlaylist(playlist);
+        allPlaylists.remove(playlist);
+    }
+
+    public void updateSong(Song song) throws Exception
+    {
+        songManager.updateSong(song);
+    }
+
+    public void updatePlaylist(Playlist playlist) throws Exception
+    {
+        songManager.updatePlaylist(playlist);
+    }
 }

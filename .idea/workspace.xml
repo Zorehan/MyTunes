@@ -5,15 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4fd1ae2c-de71-42e1-a613-ee75e8e52de6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/BLL/util/SongSearcher.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/Model/MyTunesModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BLL/SongManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BLL/SongManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Model/Model.java" beforeDir="false" />
-    </list>
-    <list id="78ec233f-7e53-49ea-905e-83b132e42ac0" name="Changes by krame" comment="">
       <change beforePath="$PROJECT_DIR$/src/BE/Song.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BE/Song.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAL/SongDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/SongDAO.java" afterDir="false" />
     </list>
+    <list id="78ec233f-7e53-49ea-905e-83b132e42ac0" name="Changes by krame" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -88,7 +83,7 @@
       <workItem from="1700736999985" duration="148000" />
       <workItem from="1700744636271" duration="151000" />
       <workItem from="1700768437790" duration="1103000" />
-      <workItem from="1700848898437" duration="9260000" />
+      <workItem from="1700848898437" duration="9565000" />
     </task>
     <servers />
   </component>

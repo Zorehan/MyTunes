@@ -34,9 +34,8 @@ public class SongDAO implements IMyTunesDataAccess {
                 String artist = rs.getString("Artist");
                 String category = rs.getString("Category");
                 String filePath = rs.getString("FilePath");
-                int playTime = rs.getInt("playTime");
 
-                Song song = new Song(id, title, artist, category, filePath, playTime);
+                Song song = new Song(id, title, artist, category, filePath);
                 allSongs.add(song);
             }
             return allSongs;
@@ -51,7 +50,7 @@ public class SongDAO implements IMyTunesDataAccess {
 
 
     public Song createSong(Song song) throws Exception {
-        String sql = "INSERT INTO dbo.Song (Title,Artist,Category,FilePath,playTime) VALUES (?,?);";
+        String sql = "INSERT INTO dbo.Song (Title,Artist,Category,FilePath) VALUES (?,?);";
 
         try (Connection conn = dataBaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);)
@@ -60,7 +59,6 @@ public class SongDAO implements IMyTunesDataAccess {
             stmt.setString(2,song.getArtist());
             stmt.setString(3,song.getCategory());
             stmt.setString(4,song.getFilePath());
-            stmt.setInt(5,song.getPlayTime());
 
             stmt.executeUpdate();
 
@@ -73,8 +71,7 @@ public class SongDAO implements IMyTunesDataAccess {
             }
 
             Song createdSong = new Song(id,song.getName(), song.getArtist(),
-                                        song.getCategory(),song.getFilePath(),
-                                        song.getPlayTime());
+                                        song.getCategory(),song.getFilePath());
 
             return createdSong;
         }
@@ -88,7 +85,7 @@ public class SongDAO implements IMyTunesDataAccess {
 
 
     public void updateSong(Song song) throws Exception {
-    String sql = "UPDATE dbo.Song SET Title = ?, Artist = ?, Category = ?, FilePath = ?, playTime = ? WHERE id = ?;";
+    String sql = "UPDATE dbo.Song SET Title = ?, Artist = ?, Category = ?, FilePath = ? WHERE id = ?;";
     try (Connection conn = dataBaseConnector.getConnection();
          PreparedStatement stmt = conn.prepareStatement(sql);)
     {
@@ -96,8 +93,7 @@ public class SongDAO implements IMyTunesDataAccess {
         stmt.setString(2,song.getArtist());
         stmt.setString(3,song.getCategory());
         stmt.setString(4,song.getFilePath());
-        stmt.setInt(5,song.getPlayTime());
-        stmt.setInt(6,song.getId());
+        stmt.setInt(5,song.getId());
 
         stmt.executeUpdate();
 
