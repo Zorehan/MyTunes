@@ -17,7 +17,7 @@ public class SongDAO implements IMyTunesDataAccess {
         dataBaseConnector = new DataBaseConnector();
     }
 
-    @Override
+
     public List<Song> getAllSongs() throws Exception {
         ArrayList<Song> allSongs = new ArrayList<>();
 
@@ -49,7 +49,7 @@ public class SongDAO implements IMyTunesDataAccess {
         }
     }
 
-    @Override
+
     public Song createSong(Song song) throws Exception {
         String sql = "INSERT INTO dbo.Song (Title,Artist,Category,FilePath,playTime) VALUES (?,?);";
 
@@ -61,7 +61,7 @@ public class SongDAO implements IMyTunesDataAccess {
             stmt.setString(3,song.getCategory());
             stmt.setString(4,song.getFilePath());
             stmt.setInt(5,song.getPlayTime());
-            
+
             stmt.executeUpdate();
 
             ResultSet rs = stmt.getGeneratedKeys();
@@ -86,9 +86,27 @@ public class SongDAO implements IMyTunesDataAccess {
         }
     }
 
-    @Override
-    public void updateSong(Song song) throws Exception {
 
+    public void updateSong(Song song) throws Exception {
+    String sql = "UPDATE dbo.Song SET Title = ?, Artist = ?, Category = ?, FilePath = ?, playTime = ? WHERE id = ?;";
+    try (Connection conn = dataBaseConnector.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql);)
+    {
+        stmt.setString(1,song.getName());
+        stmt.setString(2,song.getArtist());
+        stmt.setString(3,song.getCategory());
+        stmt.setString(4,song.getFilePath());
+        stmt.setInt(5,song.getPlayTime());
+        stmt.setInt(6,song.getId());
+
+        stmt.executeUpdate();
+
+    }
+    catch(SQLException ex)
+    {
+        ex.printStackTrace();
+        throw new Exception("Could not update song", ex);
+    }
     }
 
     @Override
