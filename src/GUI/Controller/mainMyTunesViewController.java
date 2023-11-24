@@ -7,12 +7,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class mainMyTunesViewController implements Initializable
 {
+    private MediaPlayer mediaPlayer;
     @FXML
     private TableView<Playlist> tblPlaylists;
     /*
@@ -46,5 +50,29 @@ public class mainMyTunesViewController implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    public void play(String filePathPlay)
+    {
+        File file = new File(filePathPlay);
+        stop();
+
+        if(file != null)
+        {
+            Media media = new Media(file.toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+
+            mediaPlayer.setOnEndOfMedia(() -> stop());
+
+            mediaPlayer.play();
+        }
+    }
+
+    public void stop()
+    {
+        if(mediaPlayer != null)
+        {
+            mediaPlayer.stop();
+        }
     }
 }
