@@ -1,5 +1,6 @@
 package BE;
 
+
 public class Song {
     private int id;
     private String name;
@@ -8,13 +9,18 @@ public class Song {
     private String filePath;
     private int playTime;
 
-    public Song (int id, String name, String artist, String category, String filePath, int playTime){
-        this.id = id;
+
+    /*
+        Har fjernet de fleste parametre fra konstruktøren,
+        tænker at sådan noget som playtime ikke behøves at angives her
+        men noget vi henter fra mp3 filen, det samme med id som vi bare kan
+        incriment på database niveau.
+     */
+    public Song (String name, String artist, String category, String filePath){
         this.name = name;
         this.artist = artist;
         this.category = category;
         this.filePath = filePath;
-        this.playTime = playTime;
     }
 
     public int getId() {
