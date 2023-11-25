@@ -22,11 +22,17 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class mainMyTunesViewController implements Initializable {
 
+    public ProgressBar songBar;
     private MediaPlayer mediaPlayer;
     private Duration pausedTime;
+    private Timer timer;
+    private TimerTask timerTask;
+    private boolean paused;
     @FXML
     private TableView<Playlist> tblPlaylists;
     /*
@@ -60,7 +66,7 @@ public class mainMyTunesViewController implements Initializable {
         try {
             MyTunesModel model = new MyTunesModel();
             tblSongs.setItems(model.getObservableSongs());
-
+    
             colTitle.setCellValueFactory(new PropertyValueFactory<>("name"));
             colArtist.setCellValueFactory(new PropertyValueFactory<>("artist"));
             colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
@@ -70,11 +76,37 @@ public class mainMyTunesViewController implements Initializable {
         }
     }
 
+    public void beginTimer(){
+        timer = new Timer();
+        timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                paused = false;
+                double current = mediaPlayer.getCurrentTime().toSeconds();
+                double end = mediaPlayer.getMedia().getDuration().toSeconds();
+                System.out.println(current / end);
+                songBar.setProgress(current/end);
+
+                if(current/end == 1){
+                    cancelTimer();
+                }
+            }
+        };
+
+        timer.scheduleAtFixedRate(timerTask, 1000, 1000);
+    }
+
+    public void cancelTimer(){
+        paused = true;
+        timer.cancel();
+    }
+
     public void play(Song song) {
         File file = new File(song.getFilePath());
         stop(mediaPlayer);
 
         if (file != null) {
+            beginTimer();
             Media media = new Media(file.toURI().toString());
             mediaPlayer = new MediaPlayer(media);
 
@@ -143,6 +175,7 @@ public class mainMyTunesViewController implements Initializable {
     }
 
     public void clickPauseSong(ActionEvent actionEvent) {
+        cancelTimer();
         pause(mediaPlayer);
     }
 

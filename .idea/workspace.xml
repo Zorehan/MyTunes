@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4fd1ae2c-de71-42e1-a613-ee75e8e52de6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24-11-2023_22_13__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24-11-2023_22_13__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/view/mainMyTunesView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/view/mainMyTunesView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BE/Song.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BE/Song.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/Controller/mainMyTunesViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Controller/mainMyTunesViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Controller/newSongController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Controller/newSongController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <list id="78ec233f-7e53-49ea-905e-83b132e42ac0" name="Changes by krame" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -102,7 +98,7 @@
       <workItem from="1700848898437" duration="9565000" />
       <workItem from="1700934883209" duration="230000" />
       <workItem from="1700935123992" duration="507000" />
-      <workItem from="1700935647644" duration="5789000" />
+      <workItem from="1700935647644" duration="7313000" />
     </task>
     <servers />
   </component>
