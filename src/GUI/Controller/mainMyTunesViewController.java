@@ -32,7 +32,6 @@ public class mainMyTunesViewController implements Initializable {
     private Duration pausedTime;
     private Timer timer;
     private TimerTask timerTask;
-    private boolean paused;
     @FXML
     private TableView<Playlist> tblPlaylists;
     /*
@@ -81,10 +80,8 @@ public class mainMyTunesViewController implements Initializable {
         timerTask = new TimerTask() {
             @Override
             public void run() {
-                paused = false;
                 double current = mediaPlayer.getCurrentTime().toSeconds();
                 double end = mediaPlayer.getMedia().getDuration().toSeconds();
-                System.out.println(current / end);
                 songBar.setProgress(current/end);
 
                 if(current/end == 1){
@@ -93,11 +90,10 @@ public class mainMyTunesViewController implements Initializable {
             }
         };
 
-        timer.scheduleAtFixedRate(timerTask, 1000, 1000);
+        timer.scheduleAtFixedRate(timerTask, 100, 100);
     }
 
     public void cancelTimer(){
-        paused = true;
         timer.cancel();
     }
 
