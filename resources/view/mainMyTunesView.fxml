@@ -43,6 +43,8 @@
       <Label layoutX="691.0" layoutY="22.0" text="Filter:" />
       <TextField fx:id="txtSongSearch" layoutX="730.0" layoutY="18.0" prefHeight="25.0" prefWidth="115.0" />
       <Button fx:id="btnSearch" layoutX="859.0" layoutY="18.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="0.0" text="Button" />
-      <Button fx:id="btnPlaySong" layoutX="260.0" layoutY="31.0" mnemonicParsing="false" onAction="#clickPlaySong" prefHeight="42.0" prefWidth="259.0" text="PLAY BANGERS" />
+      <Button fx:id="btnPlaySong" layoutX="34.0" layoutY="22.0" mnemonicParsing="false" onAction="#clickPlaySong" prefHeight="42.0" prefWidth="106.0" text="PLAY" />
+      <Button fx:id="btnPauseSong" layoutX="160.0" layoutY="22.0" mnemonicParsing="false" onAction="#clickPauseSong" prefHeight="42.0" prefWidth="106.0" text="PAUSE" />
+      <Button fx:id="btnStopSong" layoutX="287.0" layoutY="22.0" mnemonicParsing="false" onAction="#clickStopSong" prefHeight="42.0" prefWidth="106.0" text="STOP" />
    </children>
 </AnchorPane>

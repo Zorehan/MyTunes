@@ -43,7 +43,7 @@ public class Song {
 
     public String getFilePath()
     {
-    return category;
+    return filePath;
     }
 
     public int getPlayTime()

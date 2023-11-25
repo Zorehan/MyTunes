@@ -35,7 +35,7 @@ public class newSongController implements Initializable {
 
         if (selectedFile != null) {
             // Set the selected file path to the TextField
-            lblNewPath.setText(selectedFile.getAbsolutePath());
+            lblNewPath.setText(selectedFile.getPath());
         }
     }
 

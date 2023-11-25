@@ -13,16 +13,20 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class mainMyTunesViewController implements Initializable {
 
     private MediaPlayer mediaPlayer;
+    private Duration pausedTime;
     @FXML
     private TableView<Playlist> tblPlaylists;
     /*
@@ -66,23 +70,30 @@ public class mainMyTunesViewController implements Initializable {
         }
     }
 
-    public void play(String filePathPlay) {
-        File file = new File(filePathPlay);
-        stop();
+    public void play(Song song) {
+        File file = new File(song.getFilePath());
+        stop(mediaPlayer);
 
         if (file != null) {
             Media media = new Media(file.toURI().toString());
             mediaPlayer = new MediaPlayer(media);
 
-            mediaPlayer.setOnEndOfMedia(() -> stop());
+            mediaPlayer.setOnEndOfMedia(() -> stop(mediaPlayer));
 
             mediaPlayer.play();
         }
     }
 
-    public void stop() {
+    public void stop(MediaPlayer media) {
         if (mediaPlayer != null) {
             mediaPlayer.stop();
+        }
+    }
+
+    public void pause(MediaPlayer media) {
+        if (mediaPlayer != null) {
+            pausedTime = mediaPlayer.getCurrentTime();
+            mediaPlayer.pause();
         }
     }
 
@@ -108,5 +119,34 @@ public class mainMyTunesViewController implements Initializable {
     }
 
     public void clickPlaySong(ActionEvent actionEvent) {
+        //selectedSong er markeret fra listen og dens path gemmes til songPath
+        Song selectedSong = tblSongs.getSelectionModel().getSelectedItem();
+        Path songPath = Paths.get(selectedSong.getFilePath()).normalize();
+
+        if (mediaPlayer == null) {
+            play(selectedSong);
+        }
+        else {
+            //Filepath på sangen som i mediaplayer gemems
+            String mediaPathString = Objects.requireNonNull(mediaPlayer.getMedia().getSource()).substring(6); //io.file har "file:/" foran filepathen, så her fjerner vi det.
+            mediaPathString = mediaPathString.replace("%20", " "); //io.file erstatter spaces med "%20" så her erstattes det med " "
+            Path mediaPath = Paths.get(mediaPathString).normalize();
+
+            //Fortsætter paused sang.
+            if (mediaPath.equals(songPath)) {
+                mediaPlayer.seek(pausedTime);
+                mediaPlayer.play();
+            } else { //Starter ny selectedSong
+                play(selectedSong);
+            }
+        }
+    }
+
+    public void clickPauseSong(ActionEvent actionEvent) {
+        pause(mediaPlayer);
+    }
+
+    public void clickStopSong(ActionEvent actionEvent) {
+        stop(mediaPlayer);
     }
 }
