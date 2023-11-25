@@ -21,7 +21,7 @@ public class DataBaseConnector {
         dataSource.setServerName(databaseProperties.getProperty("Server"));
         dataSource.setDatabaseName(databaseProperties.getProperty("Database"));
         dataSource.setUser(databaseProperties.getProperty("User"));
-        dataSource.setUser(databaseProperties.getProperty("Password"));
+        dataSource.setPassword(databaseProperties.getProperty("Password"));
         dataSource.setPortNumber(1433);
         dataSource.setTrustServerCertificate(true);
     }

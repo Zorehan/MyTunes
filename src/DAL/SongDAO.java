@@ -50,7 +50,7 @@ public class SongDAO implements IMyTunesDataAccess {
 
 
     public Song createSong(Song song) throws Exception {
-        String sql = "INSERT INTO dbo.Song (Title,Artist,Category,FilePath) VALUES (?,?);";
+        String sql = "INSERT INTO dbo.Song (Title, Artist, Category, FilePath) VALUES (?, ?, ?, ?);";
 
         try (Connection conn = dataBaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);)

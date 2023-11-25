@@ -1,0 +1,146 @@
+Index: src/BE/Song.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package BE;\r\n\r\n\r\npublic class Song {\r\n    private int id;\r\n    private String name;\r\n    private String artist;\r\n    private String category;\r\n    private String filePath;\r\n    private int playTime;\r\n\r\n\r\n    /*\r\n        Har fjernet de fleste parametre fra konstruktøren,\r\n        tænker at sådan noget som playtime ikke behøves at angives her\r\n        men noget vi henter fra mp3 filen, det samme med id som vi bare kan\r\n        incriment på database niveau.\r\n     */\r\n    public Song (String name, String artist, String category, String filePath){\r\n        this.name = name;\r\n        this.artist = artist;\r\n        this.category = category;\r\n        this.filePath = filePath;\r\n    }\r\n\r\n    public int getId() {\r\n        return id;\r\n    }\r\n\r\n    public String getName() {\r\n        return name;\r\n    }\r\n\r\n    public String getArtist() {\r\n        return artist;\r\n    }\r\n\r\n    public String getCategory()\r\n    {\r\n        return category;\r\n    }\r\n\r\n    public String getFilePath()\r\n    {\r\n    return category;\r\n    }\r\n\r\n    public int getPlayTime()\r\n    {\r\n        return playTime;\r\n    }\r\n\r\n    public void setId(int id) {\r\n        this.id = id;\r\n    }\r\n\r\n    public void setName(String name) {\r\n        this.name = name;\r\n    }\r\n\r\n    public void setArtist(String artist) {\r\n        this.artist = artist;\r\n    }\r\n\r\n    public void setCategory(String category) {\r\n        this.category = category;\r\n    }\r\n\r\n    public void setFilePath(String filePath) {\r\n        this.filePath = filePath;\r\n    }\r\n\r\n    public void setPlayTime(int playTime) {\r\n        this.playTime = playTime;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/BE/Song.java b/src/BE/Song.java
+--- a/src/BE/Song.java	
++++ b/src/BE/Song.java	
+@@ -1,6 +1,8 @@
+ package BE;
+ 
+ 
++import javafx.scene.media.Media;
++
+ public class Song {
+     private int id;
+     private String name;
+@@ -16,11 +18,12 @@
+         men noget vi henter fra mp3 filen, det samme med id som vi bare kan
+         incriment på database niveau.
+      */
+-    public Song (String name, String artist, String category, String filePath){
++    public Song (int id,String name, String artist, String category, String filePath){
+         this.name = name;
+         this.artist = artist;
+         this.category = category;
+         this.filePath = filePath;
++        this.id = id;
+     }
+ 
+     public int getId() {
+@@ -42,12 +45,13 @@
+ 
+     public String getFilePath()
+     {
+-    return category;
++        return filePath;
+     }
+ 
+-    public int getPlayTime()
++    public double getPlayTime()
+     {
+-        return playTime;
++        Media media = new Media(filePath);
++        return media.getDuration().toMinutes();
+     }
+ 
+     public void setId(int id) {
+Index: src/DAL/SongDAO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package DAL;\r\n\r\nimport BE.Playlist;\r\nimport BE.Song;\r\n\r\nimport java.io.IOException;\r\nimport java.sql.*;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class SongDAO implements IMyTunesDataAccess {\r\n\r\n    private DataBaseConnector dataBaseConnector;\r\n\r\n    public SongDAO() throws Exception\r\n    {\r\n        dataBaseConnector = new DataBaseConnector();\r\n    }\r\n\r\n\r\n    public List<Song> getAllSongs() throws Exception {\r\n        ArrayList<Song> allSongs = new ArrayList<>();\r\n\r\n        try(Connection conn = dataBaseConnector.getConnection();\r\n            Statement stmt = conn.createStatement())\r\n        {\r\n            String sql = \"SELECT * FROM dbo.Song;\";\r\n            ResultSet rs = stmt.executeQuery(sql);\r\n\r\n            while (rs.next())\r\n            {\r\n                int id = rs.getInt(\"Id\");\r\n                String title = rs.getString(\"Title\");\r\n                String artist = rs.getString(\"Artist\");\r\n                String category = rs.getString(\"Category\");\r\n                String filePath = rs.getString(\"FilePath\");\r\n                int playTime = rs.getInt(\"playTime\");\r\n\r\n                Song song = new Song(id, title, artist, category, filePath, playTime);\r\n                allSongs.add(song);\r\n            }\r\n            return allSongs;\r\n        }\r\n\r\n        catch(SQLException ex)\r\n        {\r\n            ex.printStackTrace();\r\n            throw new Exception(\"Could not get movies from database\", ex);\r\n        }\r\n    }\r\n\r\n\r\n    public Song createSong(Song song) throws Exception {\r\n        String sql = \"INSERT INTO dbo.Song (Title,Artist,Category,FilePath,playTime) VALUES (?,?);\";\r\n\r\n        try (Connection conn = dataBaseConnector.getConnection();\r\n             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);)\r\n        {\r\n            stmt.setString(1,song.getName());\r\n            stmt.setString(2,song.getArtist());\r\n            stmt.setString(3,song.getCategory());\r\n            stmt.setString(4,song.getFilePath());\r\n            stmt.setInt(5,song.getPlayTime());\r\n\r\n            stmt.executeUpdate();\r\n\r\n            ResultSet rs = stmt.getGeneratedKeys();\r\n            int id = 0;\r\n\r\n            if(rs.next())\r\n            {\r\n                id = rs.getInt(1);\r\n            }\r\n\r\n            Song createdSong = new Song(id,song.getName(), song.getArtist(),\r\n                                        song.getCategory(),song.getFilePath(),\r\n                                        song.getPlayTime());\r\n\r\n            return createdSong;\r\n        }\r\n\r\n        catch (SQLException ex)\r\n        {\r\n            ex.printStackTrace();\r\n            throw new Exception(\"Could not create song\", ex);\r\n        }\r\n    }\r\n\r\n\r\n    public void updateSong(Song song) throws Exception {\r\n    String sql = \"UPDATE dbo.Song SET Title = ?, Artist = ?, Category = ?, FilePath = ?, playTime = ? WHERE id = ?;\";\r\n    try (Connection conn = dataBaseConnector.getConnection();\r\n         PreparedStatement stmt = conn.prepareStatement(sql);)\r\n    {\r\n        stmt.setString(1,song.getName());\r\n        stmt.setString(2,song.getArtist());\r\n        stmt.setString(3,song.getCategory());\r\n        stmt.setString(4,song.getFilePath());\r\n        stmt.setInt(5,song.getPlayTime());\r\n        stmt.setInt(6,song.getId());\r\n\r\n        stmt.executeUpdate();\r\n\r\n    }\r\n    catch(SQLException ex)\r\n    {\r\n        ex.printStackTrace();\r\n        throw new Exception(\"Could not update song\", ex);\r\n    }\r\n    }\r\n\r\n\r\n    public void deleteSong(Song song) throws Exception {\r\n    String sql = \"DELETE FROM dbo.Song WHERE id = ?;\";\r\n    try(Connection conn = dataBaseConnector.getConnection())\r\n    {\r\n        PreparedStatement stmt = conn.prepareStatement(sql);\r\n\r\n        stmt.setInt(1,song.getId());\r\n        stmt.executeUpdate();\r\n    }\r\n    catch(SQLException ex)\r\n    {\r\n        ex.printStackTrace();\r\n        throw new Exception(\"Could not delete song\", ex);\r\n    }\r\n    }\r\n\r\n    @Override\r\n    public List<Playlist> getAllPlaylists() throws Exception {\r\n        ArrayList<Playlist> allPlaylists = new ArrayList<>();\r\n\r\n        try(Connection conn = dataBaseConnector.getConnection();\r\n            Statement stmt = conn.createStatement())\r\n        {\r\n            String sql = \"SELECT * FROM dbo.Playlist;\";\r\n            ResultSet rs = stmt.executeQuery(sql);\r\n\r\n            while(rs.next())\r\n            {\r\n                int id = rs.getInt(\"Id\");\r\n                String name = rs.getString(\"Name\");\r\n\r\n                Playlist playlist = new Playlist(id, name);\r\n                allPlaylists.add(playlist);\r\n            }\r\n            return allPlaylists;\r\n        }\r\n        catch (SQLException ex)\r\n        {\r\n            ex.printStackTrace();\r\n            throw new Exception(\"Could not get playlists from database\", ex);\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public Playlist createPlaylist(Playlist playlist) throws Exception {\r\n        String sql = \"INSERT INTO dbo.Playlist (Name) VALUES (?,?);\";\r\n\r\n        try (Connection conn = dataBaseConnector.getConnection();\r\n             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);)\r\n        {\r\n            stmt.setString(1, playlist.getName());\r\n\r\n            stmt.executeUpdate();\r\n\r\n            ResultSet rs = stmt.getGeneratedKeys();\r\n            int id = 0;\r\n\r\n            if(rs.next())\r\n            {\r\n                id = rs.getInt(1);\r\n            }\r\n\r\n            Playlist createdPlaylist = new Playlist(id, playlist.getName());\r\n\r\n            return createdPlaylist;\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public void updatePlaylist(Playlist playlist) throws Exception {\r\n        String sql = \"UPDATE dbo.Playlist SET Name = ? WHERE id = ?;\";\r\n        try (Connection conn = dataBaseConnector.getConnection();\r\n             PreparedStatement stmt = conn.prepareStatement(sql);)\r\n        {\r\n            stmt.setString(1, playlist.getName());\r\n            stmt.setInt(2, playlist.getId());\r\n\r\n            stmt.executeUpdate();\r\n        }\r\n        catch(SQLException ex)\r\n        {\r\n            ex.printStackTrace();\r\n            throw new Exception(\"Could not update playlist\", ex);\r\n        }\r\n    }\r\n\r\n    public void deletePlaylist(Playlist playlist) throws Exception {\r\n        String sql = \"DELETE FROM dbo.Playlist WHERE id = ?;\";\r\n        try(Connection conn = dataBaseConnector.getConnection())\r\n        {\r\n            PreparedStatement stmt = conn.prepareStatement(sql);\r\n\r\n            stmt.setInt(1,playlist.getId());\r\n            stmt.executeUpdate();\r\n        }\r\n        catch(SQLException ex)\r\n        {\r\n            ex.printStackTrace();\r\n            throw new Exception(\"Could not delete playlist\", ex);\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/DAL/SongDAO.java b/src/DAL/SongDAO.java
+--- a/src/DAL/SongDAO.java	
++++ b/src/DAL/SongDAO.java	
+@@ -36,7 +36,7 @@
+                 String filePath = rs.getString("FilePath");
+                 int playTime = rs.getInt("playTime");
+ 
+-                Song song = new Song(id, title, artist, category, filePath, playTime);
++                Song song = new Song(id, title, artist, category, filePath);
+                 allSongs.add(song);
+             }
+             return allSongs;
+@@ -60,7 +60,7 @@
+             stmt.setString(2,song.getArtist());
+             stmt.setString(3,song.getCategory());
+             stmt.setString(4,song.getFilePath());
+-            stmt.setInt(5,song.getPlayTime());
++            stmt.setDouble(5,song.getPlayTime());
+ 
+             stmt.executeUpdate();
+ 
+@@ -73,8 +73,7 @@
+             }
+ 
+             Song createdSong = new Song(id,song.getName(), song.getArtist(),
+-                                        song.getCategory(),song.getFilePath(),
+-                                        song.getPlayTime());
++                                        song.getCategory(),song.getFilePath());
+ 
+             return createdSong;
+         }
+@@ -96,7 +95,7 @@
+         stmt.setString(2,song.getArtist());
+         stmt.setString(3,song.getCategory());
+         stmt.setString(4,song.getFilePath());
+-        stmt.setInt(5,song.getPlayTime());
++        stmt.setDouble(5,song.getPlayTime());
+         stmt.setInt(6,song.getId());
+ 
+         stmt.executeUpdate();
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"4fd1ae2c-de71-42e1-a613-ee75e8e52de6\" name=\"Changes\" comment=\"\">\r\n      <change afterPath=\"$PROJECT_DIR$/src/BLL/util/SongSearcher.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/GUI/Model/MyTunesModel.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/BLL/SongManager.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/BLL/SongManager.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/GUI/Model/Model.java\" beforeDir=\"false\" />\r\n    </list>\r\n    <list id=\"78ec233f-7e53-49ea-905e-83b132e42ac0\" name=\"Changes by krame\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/src/BE/Song.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/BE/Song.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"FxmlFile\" />\r\n        <option value=\"Interface\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 6\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2YZbhRYBWhQPADwTkLUiqPkkhkf\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"Downloaded.Files.Path.Enabled\": \"false\",\r\n    \"Repository.Attach.Annotations\": \"false\",\r\n    \"Repository.Attach.JavaDocs\": \"false\",\r\n    \"Repository.Attach.Sources\": \"false\",\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"WebServerToolWindowFactoryState\": \"false\",\r\n    \"codeWithMe.voiceChat.enabledByDefault\": \"false\",\r\n    \"git-widget-placeholder\": \"main\",\r\n    \"last_opened_file_path\": \"C:/Users/kadar/Documents/GitHub/Gergeren/MRS-starter-main\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"project.structure.last.edited\": \"Libraries\",\r\n    \"project.structure.proportion\": \"0.15\",\r\n    \"project.structure.side.proportion\": \"0.2\",\r\n    \"settings.editor.selected.configurable\": \"preferences.lookFeel\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Main\" />\r\n      <module name=\"MyTunes\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.Main\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"4fd1ae2c-de71-42e1-a613-ee75e8e52de6\" name=\"Changes\" comment=\"\" />\r\n      <created>1700736168706</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1700736168706</updated>\r\n      <workItem from=\"1700736169676\" duration=\"3000\" />\r\n      <workItem from=\"1700736999985\" duration=\"148000\" />\r\n      <workItem from=\"1700744636271\" duration=\"151000\" />\r\n      <workItem from=\"1700768437790\" duration=\"1103000\" />\r\n      <workItem from=\"1700848898437\" duration=\"9260000\" />\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -5,15 +5,11 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="4fd1ae2c-de71-42e1-a613-ee75e8e52de6" name="Changes" comment="">
+-      <change afterPath="$PROJECT_DIR$/src/BLL/util/SongSearcher.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/GUI/Model/MyTunesModel.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/BLL/SongManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BLL/SongManager.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/GUI/Model/Model.java" beforeDir="false" />
+-    </list>
+-    <list id="78ec233f-7e53-49ea-905e-83b132e42ac0" name="Changes by krame" comment="">
+       <change beforePath="$PROJECT_DIR$/src/BE/Song.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BE/Song.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/DAL/SongDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/SongDAO.java" afterDir="false" />
+     </list>
++    <list id="78ec233f-7e53-49ea-905e-83b132e42ac0" name="Changes by krame" comment="" />
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -29,6 +25,11 @@
+     </option>
+   </component>
+   <component name="Git.Settings">
++    <option name="RECENT_BRANCH_BY_REPOSITORY">
++      <map>
++        <entry key="$PROJECT_DIR$" value="main" />
++      </map>
++    </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
+   <component name="ProjectColorInfo">{
+@@ -50,7 +51,7 @@
+     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+     "WebServerToolWindowFactoryState": "false",
+     "codeWithMe.voiceChat.enabledByDefault": "false",
+-    "git-widget-placeholder": "main",
++    "git-widget-placeholder": "nicklas__workspace",
+     "last_opened_file_path": "C:/Users/kadar/Documents/GitHub/Gergeren/MRS-starter-main",
+     "node.js.detected.package.eslint": "true",
+     "node.js.selected.package.eslint": "(autodetect)",

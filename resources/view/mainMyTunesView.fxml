@@ -28,9 +28,9 @@
       <Button fx:id="btnMoveDownPlaylist" layoutX="250.0" layoutY="439.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="14.0" text="Button" />
       <Button fx:id="btnMoveUpPlaylist" layoutX="281.0" layoutY="439.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="24.0" text="Button" />
       <Button fx:id="btnDeleteFromPlaylist" layoutX="331.0" layoutY="439.0" mnemonicParsing="false" text="Delete" />
-      <Button fx:id="btnNewSong" layoutX="427.0" layoutY="439.0" mnemonicParsing="false" text="New" />
+      <Button fx:id="btnNewSong" layoutX="427.0" layoutY="439.0" mnemonicParsing="false" onAction="#clickNewSong" text="New" />
       <Button fx:id="btnEditSongs" layoutX="476.0" layoutY="439.0" mnemonicParsing="false" text="Edit" />
-      <Button fx:id="btnDeleteSongs" layoutX="525.0" layoutY="439.0" mnemonicParsing="false" text="Delete" />
+      <Button fx:id="btnDeleteSongs" layoutX="525.0" layoutY="439.0" mnemonicParsing="false" onAction="#clickDeleteSong" text="Delete" />
       <Button fx:id="btnClose" layoutX="836.0" layoutY="439.0" mnemonicParsing="false" text="Close" />
       <TableView fx:id="tblSongs" layoutX="428.0" layoutY="118.0" prefHeight="313.0" prefWidth="453.0">
         <columns>
@@ -43,5 +43,6 @@
       <Label layoutX="691.0" layoutY="22.0" text="Filter:" />
       <TextField fx:id="txtSongSearch" layoutX="730.0" layoutY="18.0" prefHeight="25.0" prefWidth="115.0" />
       <Button fx:id="btnSearch" layoutX="859.0" layoutY="18.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="0.0" text="Button" />
+      <Button fx:id="btnPlaySong" layoutX="260.0" layoutY="31.0" mnemonicParsing="false" onAction="#clickPlaySong" prefHeight="42.0" prefWidth="259.0" text="PLAY BANGERS" />
    </children>
 </AnchorPane>

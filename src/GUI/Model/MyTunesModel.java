@@ -43,11 +43,10 @@ public class MyTunesModel {
         allSongs.addAll(searchResults);
     }
 
-    public Song createNewSong(Song song) throws Exception
+    public void createNewSong(Song newSong) throws Exception
     {
-        Song s = songManager.createNewSong(song);
-        allSongs.add(s);
-        return s;
+        Song song = songManager.createNewSong(newSong);
+        allSongs.add(song);
     }
 
     public Playlist createNewPlaylist(Playlist playlist) throws Exception
