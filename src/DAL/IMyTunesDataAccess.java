@@ -1,6 +1,7 @@
 package DAL;
 
 import BE.Playlist;
+import BE.PlaylistSong;
 import BE.Song;
 
 import java.util.List;
@@ -22,4 +23,8 @@ public interface IMyTunesDataAccess {
     public void updatePlaylist(Playlist playlist) throws Exception;
 
     public void deletePlaylist(Playlist playlist) throws Exception;
+
+    public PlaylistSong createPlaylistSong(PlaylistSong playlistSong) throws Exception;
+
+    public void deletePlaylistSong(PlaylistSong playlistSong) throws Exception;
 }

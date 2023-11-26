@@ -1,6 +1,7 @@
 package GUI.Model;
 
 import BE.Playlist;
+import BE.PlaylistSong;
 import BE.Song;
 import BLL.SongManager;
 import javafx.collections.FXCollections;
@@ -15,6 +16,8 @@ public class MyTunesModel {
 
     private ObservableList<Playlist> allPlaylists;
 
+    private ObservableList<PlaylistSong> allPlaylistSongs;
+
     private SongManager songManager;
 
 
@@ -26,11 +29,18 @@ public class MyTunesModel {
 
         allPlaylists = FXCollections.observableArrayList();
         allPlaylists.addAll(songManager.getAllPlaylists());
+
+        allPlaylistSongs = FXCollections.observableArrayList();
     }
 
     public ObservableList<Song> getObservableSongs()
     {
         return allSongs;
+    }
+
+    public ObservableList<PlaylistSong> getObservablePlaylistSongs()
+    {
+        return allPlaylistSongs;
     }
 
     public static MyTunesModel getInstance() throws Exception
@@ -65,6 +75,12 @@ public class MyTunesModel {
     {
         Playlist p = songManager.createNewPlaylist(playlist);
         allPlaylists.add(p);
+        return p;
+    }
+
+    public PlaylistSong createNewPlaylistSong(PlaylistSong playlistSong) throws Exception
+    {
+        PlaylistSong p = songManager.createNewPlaylistSong(playlistSong);
         return p;
     }
 

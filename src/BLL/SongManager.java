@@ -1,6 +1,7 @@
 package BLL;
 
 import BE.Playlist;
+import BE.PlaylistSong;
 import BE.Song;
 import BLL.util.SongSearcher;
 import DAL.IMyTunesDataAccess;
@@ -47,6 +48,15 @@ public class SongManager {
         return songDAO.createPlaylist(newPlaylist);
     }
 
+    public PlaylistSong createNewPlaylistSong(PlaylistSong newPlaylistSong) throws Exception {
+        return songDAO.createPlaylistSong(newPlaylistSong);
+    }
+
+    public void deletePlaylistSong(PlaylistSong playlistSong) throws Exception
+    {
+        songDAO.deletePlaylistSong(playlistSong);
+    }
+
     public void deleteSong(Song song) throws Exception
     {
         songDAO.deleteSong(song);
@@ -66,4 +76,5 @@ public class SongManager {
     {
         songDAO.updatePlaylist(playlist);
     }
+
 }

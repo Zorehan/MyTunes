@@ -1,7 +1,9 @@
 package DAL;
 
 import BE.Playlist;
+import BE.PlaylistSong;
 import BE.Song;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.io.IOException;
 import java.sql.*;
@@ -205,6 +207,48 @@ public class SongDAO implements IMyTunesDataAccess {
         {
             ex.printStackTrace();
             throw new Exception("Could not delete playlist", ex);
+        }
+    }
+
+    public PlaylistSong createPlaylistSong(PlaylistSong playlistSong) throws SQLServerException {
+        String sql = "INSERT INTO dbo.PlaylistSongs (PlaylistId, SongId) VALUES (?,?);";
+
+        try(Connection conn = dataBaseConnector.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);)
+        {
+            stmt.setInt(1, playlistSong.getPlaylistId());
+            stmt.setInt(2, playlistSong.getSongId());
+
+            stmt.executeUpdate();
+
+            PlaylistSong newPlaylistSong = new PlaylistSong(playlistSong.getPlaylistId(), playlistSong.getSongId());
+
+            return newPlaylistSong;
+
+        }
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deletePlaylistSong(PlaylistSong playlistSong) throws Exception
+    {
+        String sql = "DELETE FROM dbo.PlaylistSong WHERE PlaylistId = ? AND SongId = ?;";
+
+        try(Connection conn = dataBaseConnector.getConnection())
+        {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            stmt.setInt(1, playlistSong.getPlaylistId());
+            stmt.setInt(2, playlistSong.getSongId());
+
+            stmt.executeUpdate();
+
+        }
+        catch (SQLException ex)
+        {
+            ex.printStackTrace();
+            throw new Exception("Could not delete song", ex);
         }
     }
 }
