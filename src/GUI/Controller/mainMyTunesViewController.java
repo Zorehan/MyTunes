@@ -59,17 +59,38 @@ public class mainMyTunesViewController implements Initializable {
     @FXML
     private TextField txtSongSearch;
 
+    private MyTunesModel model;
+
+    public mainMyTunesViewController()
+    {
+        try {
+            model = new MyTunesModel();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            MyTunesModel model = new MyTunesModel();
+
             tblSongs.setItems(model.getObservableSongs());
-    
+
             colTitle.setCellValueFactory(new PropertyValueFactory<>("name"));
             colArtist.setCellValueFactory(new PropertyValueFactory<>("artist"));
             colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
             colTimeSongs.setCellValueFactory(new PropertyValueFactory<>("playTime"));
+
+            txtSongSearch.textProperty().addListener(((observable, oldValue, newValue) ->
+            {
+                try{
+                    model.searchSong(newValue);
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -130,20 +151,27 @@ public class mainMyTunesViewController implements Initializable {
      */
     public void clickNewSong(ActionEvent actionEvent) throws Exception {
         try {
-            Parent newWindow = FXMLLoader.load(getClass().getResource("/view/newSongView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/newSongView.fxml"));
+            Parent newWindow = loader.load();
 
             Stage stage = new Stage();
             stage.setTitle("New Song");
             stage.setScene(new Scene(newWindow));
-            stage.show();
 
+            newSongController controller = loader.getController();
+            controller.setParentController(this);
+            controller.setStage(stage);
+            stage.showAndWait();
+
+            tblSongs.refresh();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void clickDeleteSong(ActionEvent actionEvent) {
-
+    public void clickDeleteSong(ActionEvent actionEvent) throws Exception {
+    Song s = tblSongs.getSelectionModel().getSelectedItem();
+    model.deleteSong(s);
     }
 
     public void clickPlaySong(ActionEvent actionEvent) {
@@ -177,5 +205,8 @@ public class mainMyTunesViewController implements Initializable {
 
     public void clickStopSong(ActionEvent actionEvent) {
         stop(mediaPlayer);
+    }
+
+    public void clickEditSong(ActionEvent actionEvent) {
     }
 }

@@ -20,10 +20,23 @@ public class newSongController implements Initializable {
     private TextField txtSongCategory, txtSongArtist, txtSongTitle;
     @FXML
     private Label lblNewPath;
+    private mainMyTunesViewController parentController;
+    private Stage stage;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
+
+    public void setStage(Stage stage)
+    {
+        this.stage = stage;
+    }
+
+    public void setParentController(mainMyTunesViewController parentController)
+    {
+        this.parentController = parentController;
+    }
+
     public void clickFileBrowser(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose a File");
@@ -55,6 +68,7 @@ public class newSongController implements Initializable {
             Song newSong = new Song(-1, txtSongTitle.getText(), txtSongArtist.getText(),
                                     txtSongCategory.getText(), relativePath);
             model.createNewSong(newSong);
+            stage.close();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -30,7 +30,7 @@
       <Button fx:id="btnMoveUpPlaylist" layoutX="281.0" layoutY="439.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="24.0" text="Button" />
       <Button fx:id="btnDeleteFromPlaylist" layoutX="331.0" layoutY="439.0" mnemonicParsing="false" text="Delete" />
       <Button fx:id="btnNewSong" layoutX="427.0" layoutY="439.0" mnemonicParsing="false" onAction="#clickNewSong" text="New" />
-      <Button fx:id="btnEditSongs" layoutX="476.0" layoutY="439.0" mnemonicParsing="false" text="Edit" />
+      <Button fx:id="btnEditSongs" layoutX="476.0" layoutY="439.0" mnemonicParsing="false" onAction="#clickEditSong" text="Edit" />
       <Button fx:id="btnDeleteSongs" layoutX="525.0" layoutY="439.0" mnemonicParsing="false" onAction="#clickDeleteSong" text="Delete" />
       <Button fx:id="btnClose" layoutX="836.0" layoutY="439.0" mnemonicParsing="false" text="Close" />
       <TableView fx:id="tblSongs" layoutX="428.0" layoutY="118.0" prefHeight="313.0" prefWidth="453.0">
