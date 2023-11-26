@@ -64,7 +64,7 @@ public class mainMyTunesViewController implements Initializable {
     public mainMyTunesViewController()
     {
         try {
-            model = new MyTunesModel();
+            model = MyTunesModel.getInstance();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -83,7 +83,8 @@ public class mainMyTunesViewController implements Initializable {
 
             txtSongSearch.textProperty().addListener(((observable, oldValue, newValue) ->
             {
-                try{
+                try
+                {
                     model.searchSong(newValue);
                 }
                 catch (Exception e)
@@ -91,6 +92,7 @@ public class mainMyTunesViewController implements Initializable {
                     e.printStackTrace();
                 }
             }));
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -163,7 +165,7 @@ public class mainMyTunesViewController implements Initializable {
             controller.setStage(stage);
             stage.showAndWait();
 
-            tblSongs.refresh();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

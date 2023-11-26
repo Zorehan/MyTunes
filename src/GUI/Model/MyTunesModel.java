@@ -9,12 +9,14 @@ import javafx.collections.ObservableList;
 import java.util.List;
 
 public class MyTunesModel {
+    private static MyTunesModel instance;
 
     private ObservableList<Song> allSongs;
 
     private ObservableList<Playlist> allPlaylists;
 
     private SongManager songManager;
+
 
     public MyTunesModel() throws Exception
     {
@@ -31,6 +33,15 @@ public class MyTunesModel {
         return allSongs;
     }
 
+    public static MyTunesModel getInstance() throws Exception
+    {
+        if(instance == null)
+        {
+            instance = new MyTunesModel();
+        }
+        return instance;
+    }
+
     public ObservableList<Playlist> getObservablePlaylists()
     {
         return allPlaylists;
@@ -42,11 +53,12 @@ public class MyTunesModel {
         allSongs.clear();
         allSongs.addAll(searchResults);
     }
-
-    public void createNewSong(Song newSong) throws Exception
+    
+    public Song createNewSong(Song newSong) throws Exception
     {
         Song song = songManager.createNewSong(newSong);
         allSongs.add(song);
+        return song;
     }
 
     public Playlist createNewPlaylist(Playlist playlist) throws Exception

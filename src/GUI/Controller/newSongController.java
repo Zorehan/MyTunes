@@ -64,7 +64,7 @@ public class newSongController implements Initializable {
             String fullPath = lblNewPath.getText();
             String relativePath = getRelativePath(fullPath);
 
-            MyTunesModel model = new MyTunesModel();
+            MyTunesModel model = MyTunesModel.getInstance();
             Song newSong = new Song(-1, txtSongTitle.getText(), txtSongArtist.getText(),
                                     txtSongCategory.getText(), relativePath);
             model.createNewSong(newSong);
