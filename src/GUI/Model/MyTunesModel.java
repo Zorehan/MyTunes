@@ -53,7 +53,7 @@ public class MyTunesModel {
         allSongs.clear();
         allSongs.addAll(searchResults);
     }
-    
+
     public Song createNewSong(Song newSong) throws Exception
     {
         Song song = songManager.createNewSong(newSong);

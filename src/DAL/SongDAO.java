@@ -151,7 +151,7 @@ public class SongDAO implements IMyTunesDataAccess {
 
     @Override
     public Playlist createPlaylist(Playlist playlist) throws Exception {
-        String sql = "INSERT INTO dbo.Playlist (Name) VALUES (?,?);";
+        String sql = "INSERT INTO dbo.Playlist (Name) VALUES (?);";
 
         try (Connection conn = dataBaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);)

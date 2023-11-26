@@ -57,6 +57,8 @@ public class mainMyTunesViewController implements Initializable {
     @FXML
     private TableColumn<Song, Integer> colTimeSongs = new TableColumn<>();
     @FXML
+    private TableColumn<Playlist, String> colName = new TableColumn<>();
+    @FXML
     private TextField txtSongSearch;
 
     private MyTunesModel model;
@@ -75,7 +77,9 @@ public class mainMyTunesViewController implements Initializable {
         try {
 
             tblSongs.setItems(model.getObservableSongs());
+            tblPlaylists.setItems(model.getObservablePlaylists());
 
+            colName.setCellValueFactory(new PropertyValueFactory<>("name"));
             colTitle.setCellValueFactory(new PropertyValueFactory<>("name"));
             colArtist.setCellValueFactory(new PropertyValueFactory<>("artist"));
             colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
@@ -165,7 +169,6 @@ public class mainMyTunesViewController implements Initializable {
             controller.setStage(stage);
             stage.showAndWait();
 
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -210,5 +213,30 @@ public class mainMyTunesViewController implements Initializable {
     }
 
     public void clickEditSong(ActionEvent actionEvent) {
+    }
+
+    public void clickNewPlaylist(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/newPlaylistView.fxml"));
+            Parent newWindow = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("New Playlist");
+            stage.setScene(new Scene(newWindow));
+
+            newPlaylistController controller = loader.getController();
+            controller.setParentController(this);
+            controller.setStage(stage);
+            stage.showAndWait();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+    public void clickEditPlaylist(ActionEvent actionEvent) {
+    }
+
+    public void clickDeletePlaylist(ActionEvent actionEvent) {
     }
 }

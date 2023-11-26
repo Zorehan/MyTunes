@@ -23,9 +23,9 @@
       <Label layoutX="250.0" layoutY="101.0" text="Songs on Playlist" />
       <Button layoutX="389.0" layoutY="118.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" text="&lt;-" />
       <Label layoutX="436.0" layoutY="101.0" text="Songs" />
-      <Button fx:id="btnNewPlayList" layoutX="14.0" layoutY="439.0" mnemonicParsing="false" text="New" />
-      <Button fx:id="btnEditPlayList" layoutX="101.0" layoutY="439.0" mnemonicParsing="false" text="Edit" />
-      <Button fx:id="btnDeletePlaylist" layoutX="187.0" layoutY="439.0" mnemonicParsing="false" text="Delete" />
+      <Button fx:id="btnNewPlayList" layoutX="14.0" layoutY="439.0" mnemonicParsing="false" onAction="#clickNewPlaylist" text="New" />
+      <Button fx:id="btnEditPlayList" layoutX="101.0" layoutY="439.0" mnemonicParsing="false" onAction="#clickEditPlaylist" text="Edit" />
+      <Button fx:id="btnDeletePlaylist" layoutX="187.0" layoutY="439.0" mnemonicParsing="false" onAction="#clickDeletePlaylist" text="Delete" />
       <Button fx:id="btnMoveDownPlaylist" layoutX="250.0" layoutY="439.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="14.0" text="Button" />
       <Button fx:id="btnMoveUpPlaylist" layoutX="281.0" layoutY="439.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="24.0" text="Button" />
       <Button fx:id="btnDeleteFromPlaylist" layoutX="331.0" layoutY="439.0" mnemonicParsing="false" text="Delete" />
