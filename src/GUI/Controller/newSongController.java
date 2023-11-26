@@ -39,17 +39,37 @@ public class newSongController implements Initializable {
         }
     }
 
+    /*
+    Ændringen i bund og grund er at istedet for at gemme hele filepathen så kører den relativepath metoden
+    som kun giver filepathen fra ordet "data" ergo ingen computer specific filepath (og play metoden kan faktisk køre ikke fulde paths)
+     */
     public void clickCreateSong(ActionEvent actionEvent) {
         try {
             if(lblNewPath.getText().isEmpty())
                 return;
 
+            String fullPath = lblNewPath.getText();
+            String relativePath = getRelativePath(fullPath);
+
             MyTunesModel model = new MyTunesModel();
             Song newSong = new Song(-1, txtSongTitle.getText(), txtSongArtist.getText(),
-                                    txtSongCategory.getText(), lblNewPath.getText());
+                                    txtSongCategory.getText(), relativePath);
             model.createNewSong(newSong);
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private String getRelativePath(String fullPath)
+    {
+        int indexOfData = fullPath.indexOf("data");
+        if(indexOfData != -1)
+        {
+            return fullPath.substring(indexOfData);
+        }
+        else
+        {
+            return fullPath;
         }
     }
 }
