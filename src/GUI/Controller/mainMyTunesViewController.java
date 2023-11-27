@@ -56,7 +56,7 @@ public class mainMyTunesViewController implements Initializable {
     @FXML
     private TableColumn<Song, String> colCategory = new TableColumn<>();
     @FXML
-    private TableColumn<Song, Integer> colTimeSongs = new TableColumn<>();
+    private TableColumn<Song, Double> colTimeSongs = new TableColumn<>();
     @FXML
     private TableColumn<Playlist, String> colName = new TableColumn<>();
     @FXML

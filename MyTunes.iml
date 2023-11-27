@@ -9,5 +9,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="microsoft.sqlserver.mssql.jdbc" level="project" />
+    <orderEntry type="library" name="jaudiotagger" level="project" />
+    <orderEntry type="library" name="ws.schild.jave.all.deps" level="project" />
   </component>
 </module>

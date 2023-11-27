@@ -9,7 +9,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.mainMyTunesViewController">
+<AnchorPane prefHeight="500.0" prefWidth="937.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.mainMyTunesViewController">
    <children>
       <TableView fx:id="tblPlaylists" layoutX="14.0" layoutY="118.0" prefHeight="313.0" prefWidth="225.0">
         <columns>
@@ -31,12 +31,12 @@
       <Button fx:id="btnNewSong" layoutX="427.0" layoutY="439.0" mnemonicParsing="false" onAction="#clickNewSong" text="New" />
       <Button fx:id="btnDeleteSongs" layoutX="478.0" layoutY="439.0" mnemonicParsing="false" onAction="#clickDeleteSong" text="Delete" />
       <Button fx:id="btnClose" layoutX="836.0" layoutY="439.0" mnemonicParsing="false" text="Close" />
-      <TableView fx:id="tblSongs" layoutX="428.0" layoutY="118.0" prefHeight="313.0" prefWidth="453.0">
+      <TableView fx:id="tblSongs" layoutX="428.0" layoutY="118.0" prefHeight="313.0" prefWidth="468.0">
         <columns>
           <TableColumn fx:id="colTitle" onEditCommit="#editSongName" prefWidth="197.0" text="Title" />
           <TableColumn fx:id="colArtist" onEditCommit="#editArtistName" prefWidth="129.0" text="Artist" />
             <TableColumn fx:id="colCategory" onEditCommit="#editCategoryName" prefWidth="87.0" text="Category" />
-            <TableColumn fx:id="colTimeSongs" prefWidth="39.0" text="Time" />
+            <TableColumn fx:id="colTimeSongs" prefWidth="54.0" text="Time" />
         </columns>
       </TableView>
       <Label layoutX="691.0" layoutY="22.0" text="Filter:" />
