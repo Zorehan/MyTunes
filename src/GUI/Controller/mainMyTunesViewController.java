@@ -117,7 +117,7 @@ public class mainMyTunesViewController implements Initializable {
             }
         };
 
-        timer.scheduleAtFixedRate(timerTask, 100, 100);
+        timer.scheduleAtFixedRate(timerTask, 500, 500);
     }
 
     public void cancelTimer(){
@@ -189,8 +189,9 @@ public class mainMyTunesViewController implements Initializable {
         }
         else {
             //Filepath på sangen som i mediaplayer gemems
-            String mediaPathString = Objects.requireNonNull(mediaPlayer.getMedia().getSource()).substring(6); //io.file har "file:/" foran filepathen, så her fjerner vi det.
+            String mediaPathString = mediaPlayer.getMedia().getSource();
             mediaPathString = mediaPathString.replace("%20", " "); //io.file erstatter spaces med "%20" så her erstattes det med " "
+            mediaPathString = mediaPathString.substring(mediaPathString.indexOf("data")); //Skør måde at lave relative path.
             Path mediaPath = Paths.get(mediaPathString).normalize();
 
             //Fortsætter paused sang.
