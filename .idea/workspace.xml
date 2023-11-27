@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4fd1ae2c-de71-42e1-a613-ee75e8e52de6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/view/mainMyTunesView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/view/mainMyTunesView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAL/SongDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/SongDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/Controller/mainMyTunesViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Controller/mainMyTunesViewController.java" afterDir="false" />
     </list>
     <list id="78ec233f-7e53-49ea-905e-83b132e42ac0" name="Changes by krame" comment="" />
@@ -99,7 +101,7 @@
       <workItem from="1700935123992" duration="507000" />
       <workItem from="1700935647644" duration="8788000" />
       <workItem from="1700996594023" duration="13799000" />
-      <workItem from="1701079733615" duration="36000" />
+      <workItem from="1701079733615" duration="2508000" />
     </task>
     <servers />
   </component>

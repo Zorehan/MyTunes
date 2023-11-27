@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -84,6 +85,14 @@ public class mainMyTunesViewController implements Initializable {
             colArtist.setCellValueFactory(new PropertyValueFactory<>("artist"));
             colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
             colTimeSongs.setCellValueFactory(new PropertyValueFactory<>("playTime"));
+
+            //Tillad edits i columns
+            tblSongs.setEditable(true);
+            tblPlaylists.setEditable(true);
+            colTitle.setCellFactory(TextFieldTableCell.forTableColumn());
+            colArtist.setCellFactory(TextFieldTableCell.forTableColumn());
+            colCategory.setCellFactory(TextFieldTableCell.forTableColumn());
+            colName.setCellFactory((TextFieldTableCell.forTableColumn()));
 
             txtSongSearch.textProperty().addListener(((observable, oldValue, newValue) ->
             {
@@ -175,8 +184,8 @@ public class mainMyTunesViewController implements Initializable {
     }
 
     public void clickDeleteSong(ActionEvent actionEvent) throws Exception {
-    Song s = tblSongs.getSelectionModel().getSelectedItem();
-    model.deleteSong(s);
+    Song song = tblSongs.getSelectionModel().getSelectedItem();
+    model.deleteSong(song);
     }
 
     public void clickPlaySong(ActionEvent actionEvent) {
@@ -213,8 +222,6 @@ public class mainMyTunesViewController implements Initializable {
         stop(mediaPlayer);
     }
 
-    public void clickEditSong(ActionEvent actionEvent) {
-    }
 
     public void clickNewPlaylist(ActionEvent actionEvent) {
         try {
@@ -235,9 +242,70 @@ public class mainMyTunesViewController implements Initializable {
             e.printStackTrace();
         }
     }
-    public void clickEditPlaylist(ActionEvent actionEvent) {
+
+    /**
+     * Dobbelt klik for at redigere playlist navn
+     */
+    public void editPlaylistName(TableColumn.CellEditEvent editedCell){
+        try {
+            Playlist selectedPlaylist = tblPlaylists.getSelectionModel().getSelectedItem();
+            selectedPlaylist.setName(editedCell.getNewValue().toString());
+            model.updatePlaylist(selectedPlaylist);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
+    /**
+     * Sletter en playliste på "delete" knappen
+     */
     public void clickDeletePlaylist(ActionEvent actionEvent) {
+        try {
+            Playlist playlist = tblPlaylists.getSelectionModel().getSelectedItem();
+            model.deletePlaylist(playlist);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Dobbelt klik for at redigere sangnavne
+     */
+    public void editSongName(TableColumn.CellEditEvent editedCell){
+        try {
+            Song selectedSong = tblSongs.getSelectionModel().getSelectedItem();
+            selectedSong.setName(editedCell.getNewValue().toString());
+            model.updateSong(selectedSong);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Dobbelt klik for at redigere artisten
+     */
+    public void editArtistName(TableColumn.CellEditEvent editedCell){
+        try {
+            Song selectedSong = tblSongs.getSelectionModel().getSelectedItem();
+            selectedSong.setArtist(editedCell.getNewValue().toString());
+            model.updateSong(selectedSong);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Dobbelt klik for at redigere category
+     */
+    public void editCategoryName(TableColumn.CellEditEvent editedCell){
+        try {
+            Song selectedSong = tblSongs.getSelectionModel().getSelectedItem();
+            selectedSong.setCategory(editedCell.getNewValue().toString());
+            model.updateSong(selectedSong);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
+
+

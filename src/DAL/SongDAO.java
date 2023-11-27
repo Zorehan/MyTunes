@@ -91,6 +91,7 @@ public class SongDAO implements IMyTunesDataAccess {
     try (Connection conn = dataBaseConnector.getConnection();
          PreparedStatement stmt = conn.prepareStatement(sql);)
     {
+        System.out.println("så langt");
         stmt.setString(1,song.getName());
         stmt.setString(2,song.getArtist());
         stmt.setString(3,song.getCategory());
