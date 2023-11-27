@@ -27,4 +27,10 @@ public interface IMyTunesDataAccess {
     public PlaylistSong createPlaylistSong(PlaylistSong playlistSong) throws Exception;
 
     public void deletePlaylistSong(PlaylistSong playlistSong) throws Exception;
+
+    public List<PlaylistSong> getPlaylistSongsByPlaylistId(int playlistId) throws Exception;
+
+    public List<Song> getSongsByPlaylistId(int playlistId) throws Exception;
+
+    public Song getSongsBySongId(int songId) throws Exception;
 }

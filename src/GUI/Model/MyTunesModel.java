@@ -7,6 +7,7 @@ import BLL.SongManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyTunesModel {
@@ -17,6 +18,8 @@ public class MyTunesModel {
     private ObservableList<Playlist> allPlaylists;
 
     private ObservableList<PlaylistSong> allPlaylistSongs;
+
+    private ObservableList<Song> allSongsOnPlaylist;
 
     private SongManager songManager;
 
@@ -31,16 +34,52 @@ public class MyTunesModel {
         allPlaylists.addAll(songManager.getAllPlaylists());
 
         allPlaylistSongs = FXCollections.observableArrayList();
-    }
 
+        allSongsOnPlaylist = FXCollections.observableArrayList();
+
+    }
+    public Song getSongBySongId(int songId) throws Exception {
+        return songManager.getSongBySongId(songId);
+    }
     public ObservableList<Song> getObservableSongs()
     {
         return allSongs;
     }
 
+    public List<Song> getSongsByPlaylistSong(List<PlaylistSong> playlistSongs) throws Exception
+    {
+        List<Song> songs = new ArrayList<>();
+
+        for(PlaylistSong playlistSong : playlistSongs)
+        {
+            Song s = songManager.getSongBySongId(playlistSong.getSongId());
+            songs.add(s);
+        }
+        return songs;
+    }
+
     public ObservableList<PlaylistSong> getObservablePlaylistSongs()
     {
         return allPlaylistSongs;
+    }
+
+    public void clearPlaylistSongs()
+    {
+        allPlaylistSongs.clear();
+    }
+
+    public List<PlaylistSong> getPlaylistSongById(int playListId) throws Exception {
+        return songManager.getPlayListSongsById(playListId);
+    }
+
+    public void addToPlaylistSongs(List<PlaylistSong> playlistSongList)
+    {
+        allPlaylistSongs.addAll(playlistSongList);
+    }
+
+    public List<Song> getSongsByPlaylistId(int playlistId) throws Exception
+    {
+        return songManager.getSongsByPlaylistId(playlistId);
     }
 
     public static MyTunesModel getInstance() throws Exception

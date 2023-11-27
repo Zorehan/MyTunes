@@ -21,9 +21,22 @@ public class SongManager {
         songDAO = new SongDAO();
     }
 
+    public List<PlaylistSong> getPlayListSongsById(int playlistId) throws Exception
+    {
+        return songDAO.getPlaylistSongsByPlaylistId(playlistId);
+    }
+
     public List<Song> getAllSongs() throws Exception
     {
         return songDAO.getAllSongs();
+    }
+    public Song getSongBySongId(int songId) throws Exception
+    {
+        return songDAO.getSongsBySongId(songId);
+    }
+    public List<Song> getSongsByPlaylistId(int playlistId) throws Exception
+    {
+        return songDAO.getSongsByPlaylistId(playlistId);
     }
 
     public List<Playlist> getAllPlaylists() throws Exception

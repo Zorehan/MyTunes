@@ -1,8 +1,11 @@
 package GUI.Controller;
 
 import BE.Playlist;
+import BE.PlaylistSong;
 import BE.Song;
 import GUI.Model.MyTunesModel;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,10 +24,7 @@ import java.io.File;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Objects;
-import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class mainMyTunesViewController implements Initializable {
 
@@ -46,7 +46,7 @@ public class mainMyTunesViewController implements Initializable {
     private TableColumn<PlayList, Integer> colTimePlayList;
      */
     @FXML
-    private ListView<Song> lstSongsOnPlaylist;
+    private TableView<Song> tblSongsOnPlaylist;
     @FXML
     private TableView<Song> tblSongs;
     @FXML
@@ -59,6 +59,10 @@ public class mainMyTunesViewController implements Initializable {
     private TableColumn<Song, Double> colTimeSongs = new TableColumn<>();
     @FXML
     private TableColumn<Playlist, String> colName = new TableColumn<>();
+    @FXML
+    private TableColumn<Song, String> colSongsOnPlaylistTitle = new TableColumn<>();
+    @FXML
+    private TableColumn<Song, Double> colTimeSongsOnPlaylist = new TableColumn<>();
     @FXML
     private TextField txtSongSearch;
 
@@ -80,11 +84,14 @@ public class mainMyTunesViewController implements Initializable {
             tblSongs.setItems(model.getObservableSongs());
             tblPlaylists.setItems(model.getObservablePlaylists());
 
+
             colName.setCellValueFactory(new PropertyValueFactory<>("name"));
             colTitle.setCellValueFactory(new PropertyValueFactory<>("name"));
             colArtist.setCellValueFactory(new PropertyValueFactory<>("artist"));
             colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
             colTimeSongs.setCellValueFactory(new PropertyValueFactory<>("playTime"));
+            colSongsOnPlaylistTitle.setCellValueFactory(new PropertyValueFactory<>("name"));
+            colTimeSongsOnPlaylist.setCellValueFactory(new PropertyValueFactory<>("playTime"));
 
             //Tillad edits i columns
             tblSongs.setEditable(true);
@@ -103,6 +110,30 @@ public class mainMyTunesViewController implements Initializable {
                 catch (Exception e)
                 {
                     e.printStackTrace();
+                }
+            }));
+
+            tblPlaylists.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) ->
+            {
+
+                model.clearPlaylistSongs();
+
+                if(newValue != null)
+                {
+                   Playlist selectedPlaylist = newValue;
+
+                   try
+                   {
+                       List<PlaylistSong> playlistSongs = model.getPlaylistSongById(newValue.getId());
+                       model.getObservablePlaylistSongs().addAll(playlistSongs);
+
+                       List<Song> songsOnPlaylist = model.getSongsByPlaylistSong(playlistSongs);
+
+                       ObservableList<Song> observableSongsOnPlaylist = FXCollections.observableArrayList(songsOnPlaylist);
+                       tblSongsOnPlaylist.setItems(observableSongsOnPlaylist);
+                   } catch (Exception e) {
+                       throw new RuntimeException(e);
+                   }
                 }
             }));
 
@@ -189,28 +220,59 @@ public class mainMyTunesViewController implements Initializable {
     }
 
     public void clickPlaySong(ActionEvent actionEvent) {
+       if(tblSongsOnPlaylist.getSelectionModel().getSelectedItem() != null)
+       {
+           Song selectedSong = tblSongsOnPlaylist.getSelectionModel().getSelectedItem();
+           Path songPath = Paths.get(selectedSong.getFilePath()).normalize();
+
+           if(mediaPlayer == null)
+           {
+               play(selectedSong);
+           }
+           else
+           {
+               //Filepath på sangen som i mediaplayer gemems
+               String mediaPathString = mediaPlayer.getMedia().getSource();
+               mediaPathString = mediaPathString.replace("%20", " "); //io.file erstatter spaces med "%20" så her erstattes det med " "
+               mediaPathString = mediaPathString.substring(mediaPathString.indexOf("data")); //Skør måde at lave relative path.
+               Path mediaPath = Paths.get(mediaPathString).normalize();
+
+               //Fortsætter paused sang.
+               if (mediaPath.equals(songPath)) {
+                   mediaPlayer.seek(pausedTime);
+                   mediaPlayer.play();
+               } else { //Starter ny selectedSong
+                   play(selectedSong);
+               }
+           }
+       }
+
         //selectedSong er markeret fra listen og dens path gemmes til songPath
-        Song selectedSong = tblSongs.getSelectionModel().getSelectedItem();
-        Path songPath = Paths.get(selectedSong.getFilePath()).normalize();
+        else if(tblSongs.getSelectionModel().getSelectedItem() != null)
+        {
+            Song selectedSong = tblSongs.getSelectionModel().getSelectedItem();
+            Path songPath = Paths.get(selectedSong.getFilePath()).normalize();
 
-        if (mediaPlayer == null) {
-            play(selectedSong);
-        }
-        else {
-            //Filepath på sangen som i mediaplayer gemems
-            String mediaPathString = mediaPlayer.getMedia().getSource();
-            mediaPathString = mediaPathString.replace("%20", " "); //io.file erstatter spaces med "%20" så her erstattes det med " "
-            mediaPathString = mediaPathString.substring(mediaPathString.indexOf("data")); //Skør måde at lave relative path.
-            Path mediaPath = Paths.get(mediaPathString).normalize();
-
-            //Fortsætter paused sang.
-            if (mediaPath.equals(songPath)) {
-                mediaPlayer.seek(pausedTime);
-                mediaPlayer.play();
-            } else { //Starter ny selectedSong
+            if (mediaPlayer == null) {
                 play(selectedSong);
             }
+            else {
+                //Filepath på sangen som i mediaplayer gemems
+                String mediaPathString = mediaPlayer.getMedia().getSource();
+                mediaPathString = mediaPathString.replace("%20", " "); //io.file erstatter spaces med "%20" så her erstattes det med " "
+                mediaPathString = mediaPathString.substring(mediaPathString.indexOf("data")); //Skør måde at lave relative path.
+                Path mediaPath = Paths.get(mediaPathString).normalize();
+
+                //Fortsætter paused sang.
+                if (mediaPath.equals(songPath)) {
+                    mediaPlayer.seek(pausedTime);
+                    mediaPlayer.play();
+                } else { //Starter ny selectedSong
+                    play(selectedSong);
+                }
+            }
         }
+
     }
 
     public void clickPauseSong(ActionEvent actionEvent) {
@@ -304,6 +366,26 @@ public class mainMyTunesViewController implements Initializable {
             model.updateSong(selectedSong);
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public void clickSongToPlaylist(ActionEvent actionEvent) throws Exception {
+        try
+        {
+            if(tblPlaylists.getSelectionModel().getSelectedItem() == null && tblSongs.getSelectionModel().getSelectedItem() == null)
+            {
+                return;
+            }
+
+            Song s = tblSongs.getSelectionModel().getSelectedItem();
+            Playlist p = tblPlaylists.getSelectionModel().getSelectedItem();
+
+            PlaylistSong ps = new PlaylistSong(p.getId(), s.getId());
+            model.createNewPlaylistSong(ps);
+        }
+        catch(Exception e)
+        {
+            throw new RuntimeException();
         }
     }
 }

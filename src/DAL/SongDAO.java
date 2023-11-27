@@ -19,6 +19,27 @@ public class SongDAO implements IMyTunesDataAccess {
         dataBaseConnector = new DataBaseConnector();
     }
 
+    public List<PlaylistSong> getPlaylistSongsByPlaylistId(int playlistId) throws SQLException {
+        List<PlaylistSong> playlistSongs = new ArrayList<>();
+
+        try (Connection connection = dataBaseConnector.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PlaylistSongs WHERE PlaylistId = ?")
+        ) {
+            preparedStatement.setInt(1, playlistId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int songId = resultSet.getInt("SongId");
+                    PlaylistSong playlistSong = new PlaylistSong(playlistId, songId);
+                    playlistSongs.add(playlistSong);
+                }
+            }
+        }
+
+        return playlistSongs;
+    }
+
+
 
     public List<Song> getAllSongs() throws Exception {
         ArrayList<Song> allSongs = new ArrayList<>();
@@ -84,7 +105,54 @@ public class SongDAO implements IMyTunesDataAccess {
             throw new Exception("Could not create song", ex);
         }
     }
+    public Song getSongsBySongId(int songId) throws Exception
+    {
+        String sql = "SELECT * FROM dbo.Song WHERE id = ?;";
+        try (Connection conn = dataBaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, songId);
+            ResultSet rs = stmt.executeQuery();
 
+            Song song = null;
+            while (rs.next()) {
+                int id = rs.getInt("Id");
+                String title = rs.getString("Title");
+                String artist = rs.getString("Artist");
+                String category = rs.getString("Category");
+                String filePath = rs.getString("FilePath");
+
+                song = new Song(id, title, artist, category, filePath);
+            }
+            return song;
+        }
+    }
+
+    public List<Song> getSongsByPlaylistId(int playlistId) throws Exception
+    {
+        List<Song> songs = new ArrayList<>();
+        String sql = "SELECT Songs.* FROM Songs " + "JOIN PlaylistSongs ON Songs.id = PlaylistSongs.songId " + "WHERE PlaylistSongs.playlistId = ?;";
+        try(Connection conn = dataBaseConnector.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql))
+        {
+            stmt.setInt(1, playlistId);
+
+            try (ResultSet rs = stmt.executeQuery())
+            {
+                while(rs.next())
+                {
+                    int id = rs.getInt("Id");
+                    String title = rs.getString("Title");
+                    String artist = rs.getString("Artist");
+                    String category = rs.getString("Category");
+                    String filePath = rs.getString("FilePath");
+
+                    Song song = new Song(id, title, artist, category, filePath);
+                    songs.add(song);
+                }
+            }
+        }
+        return songs;
+    }
 
     public void updateSong(Song song) throws Exception {
     String sql = "UPDATE dbo.Song SET Title = ?, Artist = ?, Category = ?, FilePath = ? WHERE id = ?;";
