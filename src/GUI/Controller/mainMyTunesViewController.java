@@ -4,6 +4,8 @@ import BE.Playlist;
 import BE.PlaylistSong;
 import BE.Song;
 import GUI.Model.MyTunesModel;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -45,6 +48,8 @@ public class mainMyTunesViewController implements Initializable {
     @FXML
     private TableColumn<PlayList, Integer> colTimePlayList;
      */
+    @FXML
+    private Slider volumeSlider;
     @FXML
     private TableView<Song> tblSongsOnPlaylist;
     @FXML
@@ -387,6 +392,11 @@ public class mainMyTunesViewController implements Initializable {
         {
             throw new RuntimeException();
         }
+    }
+
+    public void changeVolume(MouseEvent mouseEvent) {
+        volumeSlider.valueProperty().addListener((observable, oldValue, newValue)
+                -> mediaPlayer.setVolume(volumeSlider.getValue() * 0.01));
     }
 }
 
