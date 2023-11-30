@@ -123,13 +123,14 @@ public class testViewController implements Initializable {
 
 
     public void clickPlaySong(ActionEvent actionEvent) {
-        if (borderPane.getCenter().getId().equals("test")) {
+        if (borderPane.getCenter().getId().equals("browse")) {
             browseController.setSelectedSong();
-            Song song = model.retrieveSong();
-            System.out.println(song);
+            Song song = model.getSong();
             songPlay(song);
         } else {
-            System.out.println("test not complete");
+            playlistController.setSelectedSong();
+            Song song = model.getSong();
+            songPlay(song);
         }
     }
 
@@ -213,8 +214,8 @@ public class testViewController implements Initializable {
     }
 
     public Playlist getSelectedPlaylist() {
-        Playlist p = tblPlaylists.getSelectionModel().getSelectedItem();
-        return p;
+        Playlist playlist = tblPlaylists.getSelectionModel().getSelectedItem();
+        return playlist;
     }
 
     public void changeVolume(MouseEvent mouseEvent) {
@@ -231,6 +232,7 @@ public class testViewController implements Initializable {
     }
 
     public void clickOpenPlaylist(MouseEvent mouseEvent) throws IOException {
+        model.setPlaylist(tblPlaylists.getSelectionModel().getSelectedItem());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/playlistView.fxml"));
         Parent p = loader.load();
         playlistController = loader.getController();

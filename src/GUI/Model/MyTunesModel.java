@@ -24,6 +24,7 @@ public class MyTunesModel {
     private SongManager songManager;
 
     private Song song;
+    private Playlist playlist;
 
 
     public MyTunesModel() throws Exception
@@ -38,8 +39,17 @@ public class MyTunesModel {
         allPlaylistSongs = FXCollections.observableArrayList();
 
         allSongsOnPlaylist = FXCollections.observableArrayList();
-
     }
+
+    public static MyTunesModel getInstance() throws Exception
+    {
+        if(instance == null)
+        {
+            instance = new MyTunesModel();
+        }
+        return instance;
+    }
+
     public Song getSongBySongId(int songId) throws Exception {
         return songManager.getSongBySongId(songId);
     }
@@ -82,15 +92,6 @@ public class MyTunesModel {
     public List<Song> getSongsByPlaylistId(int playlistId) throws Exception
     {
         return songManager.getSongsByPlaylistId(playlistId);
-    }
-
-    public static MyTunesModel getInstance() throws Exception
-    {
-        if(instance == null)
-        {
-            instance = new MyTunesModel();
-        }
-        return instance;
     }
 
     public ObservableList<Playlist> getObservablePlaylists()
@@ -147,13 +148,23 @@ public class MyTunesModel {
         songManager.updatePlaylist(playlist);
     }
 
-    public Song retrieveSong(){
+    public Song getSong(){
         return song;
+    }
+
+    public Playlist getPlaylist(){
+        return playlist;
     }
 
     public void setSong(Song song){
         if(song != null){
             this.song = song;
+        }
+    }
+
+    public void setPlaylist(Playlist playlist){
+        if(playlist != null){
+            this.playlist = playlist;
         }
     }
 }

@@ -6,7 +6,7 @@
 
 <AnchorPane id="test" prefHeight="600" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.playlistController">
     <children>
-        <TableView fx:id="tblSongsOnPlaylist" layoutX="14.0" layoutY="14.0" prefHeight="525.0" prefWidth="775.0">
+        <TableView fx:id="tblSongsOnPlaylist" layoutX="14.0" layoutY="14.0" onMouseClicked="#setSelectedSong" prefHeight="525.0" prefWidth="775.0">
             <columns>
                 <TableColumn fx:id="colTitle" prefWidth="216.0" text="Title" />
                 <TableColumn fx:id="colArtist" prefWidth="297.0" text="Artist" />

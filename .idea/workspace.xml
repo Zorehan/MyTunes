@@ -5,19 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4fd1ae2c-de71-42e1-a613-ee75e8e52de6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/view/browseView.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/view/testView.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/Controller/browseViewController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/Controller/playlistController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUI/Controller/testViewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/view/mainMyTunesView.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/view/view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/view/playlistView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Controller/mainMyTunesViewController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Controller/newPlaylistController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Controller/newPlaylistController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Controller/newSongController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Controller/newSongController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/view/browseView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/view/browseView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/Controller/browseViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Controller/browseViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/Controller/playlistController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Controller/playlistController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/Controller/testViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Controller/testViewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/Model/MyTunesModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Model/MyTunesModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <list id="78ec233f-7e53-49ea-905e-83b132e42ac0" name="Changes by krame" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -61,7 +54,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Nicklas__workspace",
     "last_opened_file_path": "C:/Users/krame/OneDrive/Datamatiker/SCO/IntelliJ/SimpleCalculator",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -114,7 +107,7 @@
       <workItem from="1701079733615" duration="10640000" />
       <workItem from="1701117885390" duration="664000" />
       <workItem from="1701185071146" duration="1071000" />
-      <workItem from="1701346129853" duration="22208000" />
+      <workItem from="1701346129853" duration="24361000" />
     </task>
     <servers />
   </component>
