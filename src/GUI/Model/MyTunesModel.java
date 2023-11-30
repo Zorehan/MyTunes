@@ -23,6 +23,8 @@ public class MyTunesModel {
 
     private SongManager songManager;
 
+    private Song song;
+
 
     public MyTunesModel() throws Exception
     {
@@ -143,5 +145,15 @@ public class MyTunesModel {
     public void updatePlaylist(Playlist playlist) throws Exception
     {
         songManager.updatePlaylist(playlist);
+    }
+
+    public Song retrieveSong(){
+        return song;
+    }
+
+    public void setSong(Song song){
+        if(song != null){
+            this.song = song;
+        }
     }
 }

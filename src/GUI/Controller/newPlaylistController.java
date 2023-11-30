@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 public class newPlaylistController {
 
     private Stage stage;
-    private mainMyTunesViewController parentController;
+    private testViewController parentController;
 
     @FXML
     private TextField txtPlaylistname;
@@ -39,7 +39,7 @@ public class newPlaylistController {
         this.stage = stage;
     }
 
-    public void setParentController(mainMyTunesViewController parentController)
+    public void setParentController(testViewController parentController)
     {
         this.parentController = parentController;
     }

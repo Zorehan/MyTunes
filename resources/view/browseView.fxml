@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="test" prefHeight="600" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.browseViewController">
+   <children>
+      <Button fx:id="btnNewSong" layoutX="14.0" layoutY="554.0" mnemonicParsing="false" onAction="#clickNewSong" text="New" />
+      <Button fx:id="btnDeleteSongs" layoutX="67.0" layoutY="554.0" mnemonicParsing="false" onAction="#clickDeleteSong" text="Delete" />
+      <Button fx:id="btnClose" layoutX="742.0" layoutY="554.0" mnemonicParsing="false" text="Close" />
+      <TableView fx:id="tblSongs" layoutX="14.0" layoutY="14.0" onMouseClicked="#setSelectedSong" prefHeight="539.0" prefWidth="774.0">
+        <columns>
+          <TableColumn fx:id="colTitle" onEditCommit="#editSongName" prefWidth="197.0" text="Title" />
+          <TableColumn fx:id="colArtist" onEditCommit="#editArtistName" prefWidth="129.0" text="Artist" />
+            <TableColumn fx:id="colCategory" onEditCommit="#editCategoryName" prefWidth="87.0" text="Category" />
+            <TableColumn fx:id="colTimeSongs" prefWidth="54.0" text="Time" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnAddToPlaylist" layoutX="357.0" layoutY="554.0" mnemonicParsing="false" onAction="#clickAddToPlaylist" text="Add to Playlist" />
+   </children>
+</AnchorPane>

@@ -20,7 +20,7 @@ public class newSongController implements Initializable {
     private TextField txtSongCategory, txtSongArtist, txtSongTitle;
     @FXML
     private Label lblNewPath;
-    private mainMyTunesViewController parentController;
+    private browseViewController parentController;
     private Stage stage;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -32,7 +32,7 @@ public class newSongController implements Initializable {
         this.stage = stage;
     }
 
-    public void setParentController(mainMyTunesViewController parentController)
+    public void setParentController(browseViewController parentController)
     {
         this.parentController = parentController;
     }

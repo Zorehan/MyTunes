@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="736.0" prefWidth="1112.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.testViewController">
+   <left>
+      <VBox prefHeight="736.0" prefWidth="266.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btnBrowse" mnemonicParsing="false" onAction="#clickBrowse" prefHeight="80.0" prefWidth="266.0" text="Browse" />
+            <TextField fx:id="txtSongSearch" promptText="Seach" />
+            <TableView fx:id="tblPlaylists" onMouseClicked="#clickOpenPlaylist" prefHeight="534.0" prefWidth="242.0">
+               <columns>
+                  <TableColumn fx:id="colName" prefWidth="195.0" text="Playlist" />
+                  <TableColumn prefWidth="70.0" text="Songs" />
+               </columns>
+            </TableView>
+            <HBox prefHeight="69.0" prefWidth="266.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#clickNewPlaylist" prefHeight="37.0" prefWidth="141.0" text="Create" />
+                  <Button mnemonicParsing="false" onAction="#clickDeletePlaylist" prefHeight="37.0" prefWidth="131.0" text="Delete" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </left>
+   <top>
+      <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+          <Button mnemonicParsing="false" text="Button" />
+        </items>
+      </ToolBar>
+   </top>
+   <bottom>
+      <Pane prefHeight="84.0" prefWidth="1112.0" BorderPane.alignment="CENTER">
+         <children>
+            <ProgressBar fx:id="songBar" layoutX="210.0" layoutY="42.0" prefHeight="27.0" prefWidth="693.0" progress="0.0" />
+            <Button layoutX="510.0" mnemonicParsing="false" onAction="#clickPlaySong" prefHeight="39.0" prefWidth="94.0" text="Play" />
+            <Button layoutX="620.0" mnemonicParsing="false" onAction="#clickStopSong" prefHeight="39.0" prefWidth="94.0" text="Stop" />
+            <Button layoutX="394.0" mnemonicParsing="false" onAction="#clickPauseSong" prefHeight="39.0" prefWidth="94.0" text="Pause" />
+         </children>
+      </Pane>
+   </bottom>
+</BorderPane>
