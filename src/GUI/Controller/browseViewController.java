@@ -1,7 +1,5 @@
 package GUI.Controller;
 
-import BE.Playlist;
-import BE.PlaylistSong;
 import BE.Song;
 import GUI.Model.MyTunesModel;
 import javafx.event.ActionEvent;
@@ -20,7 +18,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class browseViewController implements Initializable{
-    private static browseViewController instance;
     private MyTunesModel model;
     private testViewController mainController;
 
@@ -127,10 +124,6 @@ public class browseViewController implements Initializable{
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public void clickSongToPlaylist(ActionEvent actionEvent) throws Exception {
-
     }
 
     public void clickAddToPlaylist(ActionEvent actionEvent) {

@@ -42,11 +42,9 @@ public class testViewController implements Initializable {
     @FXML
     private Slider volumeSlider;
     @FXML
-    private TableColumn<Song, String> colSongsOnPlaylistTitle = new TableColumn<>();
-    @FXML
-    private TableColumn<Song, Double> colTimeSongsOnPlaylist = new TableColumn<>();
-    @FXML
     private TextField txtSongSearch;
+    @FXML
+    public Label lblCurrentSong, lblCurrentArtist;
 
     private MyTunesModel model;
     private browseViewController browseController;
@@ -101,9 +99,8 @@ public class testViewController implements Initializable {
             beginTimer();
             Media media = new Media(file.toURI().toString());
             mediaPlayer = new MediaPlayer(media);
-
+            mediaPlayer.setVolume(volumeSlider.getValue() * 0.01);
             mediaPlayer.setOnEndOfMedia(() -> stop(mediaPlayer));
-
             mediaPlayer.play();
         }
     }
@@ -126,10 +123,12 @@ public class testViewController implements Initializable {
         if (borderPane.getCenter().getId().equals("browse")) {
             browseController.setSelectedSong();
             Song song = model.getSong();
+            setSongName(song);
             songPlay(song);
         } else {
             playlistController.setSelectedSong();
             Song song = model.getSong();
+            setSongName(song);
             songPlay(song);
         }
     }
@@ -213,14 +212,14 @@ public class testViewController implements Initializable {
         }
     }
 
-    public Playlist getSelectedPlaylist() {
-        Playlist playlist = tblPlaylists.getSelectionModel().getSelectedItem();
-        return playlist;
-    }
-
     public void changeVolume(MouseEvent mouseEvent) {
         volumeSlider.valueProperty().addListener((observable, oldValue, newValue)
                 -> mediaPlayer.setVolume(volumeSlider.getValue() * 0.01));
+    }
+
+    public void setSongName(Song song) {
+        lblCurrentSong.setText(song.getName());
+        lblCurrentArtist.setText(song.getArtist());
     }
 
     public void clickBrowse(ActionEvent actionEvent) throws IOException {
