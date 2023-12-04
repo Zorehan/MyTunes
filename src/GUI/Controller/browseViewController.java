@@ -130,22 +130,25 @@ public class browseViewController implements Initializable{
     }
 
     public void clickSongToPlaylist(ActionEvent actionEvent) throws Exception {
-        try {
-            if (mainController.getSelectedPlaylist() == null && tblSongs.getSelectionModel().getSelectedItem() == null) {
-                return;
-            }
 
-            Song s = tblSongs.getSelectionModel().getSelectedItem();
-            Playlist p = mainController.getSelectedPlaylist();
-
-            PlaylistSong ps = new PlaylistSong(p.getId(), s.getId());
-            model.createNewPlaylistSong(ps);
-        } catch (Exception e) {
-            throw new RuntimeException();
-        }
     }
 
     public void clickAddToPlaylist(ActionEvent actionEvent) {
-        System.out.println(tblSongs.getSelectionModel().getSelectedItem());
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/addSongToPlaylistView.fxml"));
+            Parent newWindow = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Add Song");
+            stage.setScene(new Scene(newWindow));
+
+            songToPlaylistController controller = loader.getController();
+            controller.setParentController(this);
+            controller.setStage(stage);
+            stage.showAndWait();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

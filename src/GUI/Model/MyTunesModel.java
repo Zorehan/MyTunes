@@ -138,6 +138,11 @@ public class MyTunesModel {
         allPlaylists.remove(playlist);
     }
 
+    public void deletePlaylistSong(PlaylistSong playlistSong) throws Exception
+    {
+        songManager.deletePlaylistSong(playlistSong);
+    }
+
     public void updateSong(Song song) throws Exception
     {
         songManager.updateSong(song);

@@ -301,7 +301,7 @@ public class SongDAO implements IMyTunesDataAccess {
 
     public void deletePlaylistSong(PlaylistSong playlistSong) throws Exception
     {
-        String sql = "DELETE FROM dbo.PlaylistSong WHERE PlaylistId = ? AND SongId = ?;";
+        String sql = "DELETE FROM dbo.PlaylistSongs WHERE PlaylistId = ? AND SongId = ?;";
 
         try(Connection conn = dataBaseConnector.getConnection())
         {
