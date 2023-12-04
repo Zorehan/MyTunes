@@ -6,9 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="4fd1ae2c-de71-42e1-a613-ee75e8e52de6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/view/testView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/view/testView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/view/playlistView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/view/playlistView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/view/testView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/view/mainView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/Controller/browseViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Controller/browseViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Controller/testViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Controller/testViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/Controller/newPlaylistController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Controller/newPlaylistController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/Controller/testViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Controller/mainViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <list id="78ec233f-7e53-49ea-905e-83b132e42ac0" name="Changes by krame" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -106,7 +109,7 @@
       <workItem from="1701117885390" duration="664000" />
       <workItem from="1701185071146" duration="1071000" />
       <workItem from="1701346129853" duration="24958000" />
-      <workItem from="1701692871617" duration="6387000" />
+      <workItem from="1701692871617" duration="7004000" />
     </task>
     <servers />
   </component>

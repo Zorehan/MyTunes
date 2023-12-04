@@ -27,7 +27,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 
-public class testViewController implements Initializable {
+public class mainViewController implements Initializable {
     public ProgressBar songBar;
     public TableColumn<Playlist, String> colName = new TableColumn<>();
     private MediaPlayer mediaPlayer;
@@ -50,7 +50,7 @@ public class testViewController implements Initializable {
     private browseViewController browseController;
     private playlistController playlistController;
 
-    public testViewController() {
+    public mainViewController() {
         try {
             model = MyTunesModel.getInstance();
 

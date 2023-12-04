@@ -5,16 +5,16 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="test" prefHeight="600" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.playlistController">
+<AnchorPane id="test" prefHeight="604.0" prefWidth="834.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.playlistController">
     <children>
-        <TableView fx:id="tblSongsOnPlaylist" layoutX="14.0" layoutY="14.0" onMouseClicked="#setSelectedSong" prefHeight="525.0" prefWidth="775.0">
+        <TableView fx:id="tblSongsOnPlaylist" onMouseClicked="#setSelectedSong" prefHeight="555.0" prefWidth="845.0">
             <columns>
                 <TableColumn fx:id="colTitle" prefWidth="216.0" text="Title" />
                 <TableColumn fx:id="colArtist" prefWidth="297.0" text="Artist" />
-                <TableColumn fx:id="colCategory" prefWidth="138.0" text="Category" />
-                <TableColumn fx:id="colTimeSongs" prefWidth="122.0" text="Time" />
+                <TableColumn fx:id="colCategory" prefWidth="173.0" text="Category" />
+                <TableColumn fx:id="colTimeSongs" prefWidth="156.0" text="Time" />
             </columns>
         </TableView>
-      <Button layoutX="701.0" layoutY="539.0" mnemonicParsing="false" onAction="#clickRemove" prefHeight="46.0" prefWidth="88.0" text="Remove" />
+      <Button layoutX="720.0" layoutY="554.0" mnemonicParsing="false" onAction="#clickRemove" prefHeight="60.0" prefWidth="125.0" text="Remove" />
     </children>
 </AnchorPane>

@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 
 public class browseViewController implements Initializable{
     private MyTunesModel model;
-    private testViewController mainController;
+    private mainViewController mainController;
 
     @FXML
     private TableView<Song> tblSongs;
