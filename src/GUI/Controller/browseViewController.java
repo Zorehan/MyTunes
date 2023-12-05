@@ -30,7 +30,7 @@ public class browseViewController implements Initializable{
     @FXML
     private TableColumn<Song, String> colCategory = new TableColumn<>();
     @FXML
-    private TableColumn<Song, Double> colTimeSongs = new TableColumn<>();
+    private TableColumn<Song, String> colTimeSongs = new TableColumn<>();
 
     public browseViewController()
     {

@@ -32,7 +32,7 @@ public class playlistController implements Initializable {
     @FXML
     private TableColumn<Song, String> colCategory = new TableColumn<>();
     @FXML
-    private TableColumn<Song, Double> colTimeSongs = new TableColumn<>();
+    private TableColumn<Song, String> colTimeSongs = new TableColumn<>();
 
     public playlistController() {
         try {
@@ -70,7 +70,6 @@ public class playlistController implements Initializable {
     }
 
     public void setSelectedSong(){
-        System.out.println(tblSongsOnPlaylist.getSelectionModel().getSelectedItem());
         model.setSong(tblSongsOnPlaylist.getSelectionModel().getSelectedItem());
     }
 

@@ -56,7 +56,7 @@ public class SongDAO implements IMyTunesDataAccess {
                 String title = rs.getString("Title");
                 String artist = rs.getString("Artist");
                 String category = rs.getString("Category");
-                String filePath = rs.getString("FilePath");
+                String filePath = rs.getString("FilePath");;
 
                 Song song = new Song(id, title, artist, category, filePath);
                 allSongs.add(song);
