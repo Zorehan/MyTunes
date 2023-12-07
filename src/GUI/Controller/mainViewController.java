@@ -3,6 +3,7 @@ package GUI.Controller;
 import BE.Playlist;
 import BE.Song;
 import GUI.Model.MyTunesModel;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,6 +34,8 @@ public class mainViewController implements Initializable {
     private Duration pausedTime;
     private Timer timer;
     private boolean playing;
+    private boolean changing;
+    private int changedSlider = 0;
     private TimerTask timerTask;
     @FXML
     private Button btnPlayPause;
@@ -41,7 +44,7 @@ public class mainViewController implements Initializable {
     @FXML
     private TableView<Playlist> tblPlaylists;
     @FXML
-    private Slider volumeSlider;
+    private Slider volumeSlider, songSlider;;
     @FXML
     private TextField txtSongSearch;
     @FXML
@@ -70,25 +73,35 @@ public class mainViewController implements Initializable {
     }
 
     public void beginTimer() {
-        timer = new Timer();
-        timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                double current = mediaPlayer.getCurrentTime().toSeconds();
-                double end = mediaPlayer.getMedia().getDuration().toSeconds();
-                songBar.setProgress(current / end);
-                if (current / end == 1) {
-                    cancelTimer();
+        mediaPlayer.setOnReady(() -> {
+            songSlider.setMax(0.0);
+            songSlider.setMax(mediaPlayer.getTotalDuration().toSeconds());
+            // Her ser man om slideren ændrer sig
+            songSlider.valueChangingProperty().addListener((observableValue, aBoolean, t1) -> {
+                changing = t1;
+                if (!changing) { // Brugeren rører ikke slideren
+                    mediaPlayer.seek(Duration.seconds(changedSlider));
                 }
-            }
-        };
-
-        timer.scheduleAtFixedRate(timerTask, 500, 500);
+            });
+            songSlider.valueProperty().addListener((observableValue, number, t1) -> {
+                if (changing) {
+                    changedSlider = t1.intValue();
+                } else { //Understøtter klik funktion frem for drag
+                    int change = Math.abs(t1.intValue() - number.intValue());
+                    if (change > 10) {
+                        mediaPlayer.seek(Duration.seconds(t1.intValue()));
+                    }
+                }
+            });
+            // Ændrer sliderens værdi når brugeren ikke rører slideren
+            mediaPlayer.currentTimeProperty().addListener((observableValue, duration, t1) -> {
+                if (!changing) {
+                    songSlider.setValue(t1.toSeconds());
+                }
+            });
+        });
     }
 
-    public void cancelTimer() {
-        timer.cancel();
-    }
 
     /**
      * Begynder at få label til at tælle op så man kan se hvor langt i sangen man er.
@@ -114,7 +127,6 @@ public class mainViewController implements Initializable {
 
         if (file != null) {
             setSongName(song);
-            beginTimer();
             Media media = new Media(file.toURI().toString());
             mediaPlayer = new MediaPlayer(media);
             mediaPlayer.setVolume(volumeSlider.getValue() * 0.01);
@@ -122,6 +134,7 @@ public class mainViewController implements Initializable {
             mediaPlayer.play();
             lblSongEnd.setText(model.getSong().getPlayTime());
             beginLblTimer();
+            beginTimer();
         }
     }
 
@@ -188,7 +201,6 @@ public class mainViewController implements Initializable {
             btnPlayPause.setText("Pause");
         }
         else if(playing){
-            cancelTimer();
             pause(mediaPlayer);
             playing = false;
             btnPlayPause.setText("Play");
