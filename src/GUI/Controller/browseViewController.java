@@ -10,8 +10,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.InputMethodEvent;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -19,8 +21,11 @@ import java.util.ResourceBundle;
 
 public class browseViewController implements Initializable{
     private MyTunesModel model;
+
     private mainViewController mainController;
 
+    @FXML
+    private TextField txtSongSearch;
     @FXML
     private TableView<Song> tblSongs;
     @FXML
@@ -54,6 +59,8 @@ public class browseViewController implements Initializable{
         colTitle.setCellFactory(TextFieldTableCell.forTableColumn());
         colArtist.setCellFactory(TextFieldTableCell.forTableColumn());
         colCategory.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        search();
     }
 
     public void setSelectedSong(){
@@ -144,5 +151,19 @@ public class browseViewController implements Initializable{
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void search(){
+        txtSongSearch.textProperty().addListener(((observable, oldValue, newValue) ->
+        {
+            try
+            {
+                model.searchSong(newValue);
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }));
     }
 }

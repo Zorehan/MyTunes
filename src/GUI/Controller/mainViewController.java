@@ -3,7 +3,6 @@ package GUI.Controller;
 import BE.Playlist;
 import BE.Song;
 import GUI.Model.MyTunesModel;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,15 +27,12 @@ import java.util.*;
 
 
 public class mainViewController implements Initializable {
-    public ProgressBar songBar;
     public TableColumn<Playlist, String> colName = new TableColumn<>();
     private MediaPlayer mediaPlayer;
     private Duration pausedTime;
-    private Timer timer;
     private boolean playing;
     private boolean changing;
     private int changedSlider = 0;
-    private TimerTask timerTask;
     @FXML
     private Button btnPlayPause;
     @FXML
@@ -46,12 +42,8 @@ public class mainViewController implements Initializable {
     @FXML
     private Slider volumeSlider, songSlider;;
     @FXML
-    private TextField txtSongSearch;
-    @FXML
     private Label lblCurrentSong, lblCurrentArtist, lblSongCurrent, lblSongEnd;
     private MyTunesModel model;
-    private browseViewController browseController;
-    private playlistController playlistController;
     private List<Song> songList;
     private Song song;
 
@@ -287,7 +279,7 @@ public class mainViewController implements Initializable {
     public void clickBrowse(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/browseView.fxml"));
         Parent p = loader.load();
-        browseController = loader.getController();
+        browseViewController browseController = loader.getController();
         AnchorPane view = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/browseView.fxml")));
         borderPane.setCenter(view);
     }
@@ -296,7 +288,7 @@ public class mainViewController implements Initializable {
         model.setPlaylist(tblPlaylists.getSelectionModel().getSelectedItem());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/playlistView.fxml"));
         Parent p = loader.load();
-        playlistController = loader.getController();
+        GUI.Controller.playlistController playlistController = loader.getController();
         AnchorPane view = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/playlistView.fxml")));
         borderPane.setCenter(view);
     }

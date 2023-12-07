@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="4fd1ae2c-de71-42e1-a613-ee75e8e52de6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/view/browseView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/view/browseView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/view/mainView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/view/mainView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/Controller/browseViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Controller/browseViewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/Controller/mainViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Controller/mainViewController.java" afterDir="false" />
     </list>
     <list id="78ec233f-7e53-49ea-905e-83b132e42ac0" name="Changes by krame" comment="" />
