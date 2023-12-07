@@ -60,6 +60,7 @@ public class playlistController implements Initializable {
             List<Song> songsOnPlaylist = model.getSongsByPlaylistSong(playlistSongs);
             observableSongsOnPlaylist = FXCollections.observableArrayList(songsOnPlaylist);
             tblSongsOnPlaylist.setItems(observableSongsOnPlaylist);
+            model.setPlaylistSongs(observableSongsOnPlaylist);
             colTitle.setCellValueFactory(new PropertyValueFactory<>("name"));
             colArtist.setCellValueFactory(new PropertyValueFactory<>("artist"));
             colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));

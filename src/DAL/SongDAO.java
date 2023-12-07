@@ -130,7 +130,7 @@ public class SongDAO implements IMyTunesDataAccess {
     public List<Song> getSongsByPlaylistId(int playlistId) throws Exception
     {
         List<Song> songs = new ArrayList<>();
-        String sql = "SELECT Songs.* FROM Songs " + "JOIN PlaylistSongs ON Songs.id = PlaylistSongs.songId " + "WHERE PlaylistSongs.playlistId = ?;";
+        String sql = "SELECT Song.* FROM Song " + "JOIN PlaylistSongs ON Song.Id = PlaylistSongs.SongId " + "WHERE PlaylistSongs.playlistId = ?;";
         try(Connection conn = dataBaseConnector.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql))
         {

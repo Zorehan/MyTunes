@@ -11,8 +11,7 @@
             <columns>
                 <TableColumn fx:id="colTitle" prefWidth="216.0" text="Title" />
                 <TableColumn fx:id="colArtist" prefWidth="297.0" text="Artist" />
-                <TableColumn fx:id="colCategory" prefWidth="173.0" text="Category" />
-                <TableColumn fx:id="colTimeSongs" prefWidth="156.0" text="Time" />
+                <TableColumn fx:id="colCategory" prefWidth="322.0" text="Category" />
             </columns>
         </TableView>
       <Button layoutX="720.0" layoutY="554.0" mnemonicParsing="false" onAction="#clickRemove" prefHeight="60.0" prefWidth="125.0" text="Remove" />

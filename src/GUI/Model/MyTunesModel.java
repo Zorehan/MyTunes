@@ -172,4 +172,14 @@ public class MyTunesModel {
             this.playlist = playlist;
         }
     }
+
+    public void setPlaylistSongs(ObservableList<Song> allSongsOnPlaylist){
+        if(allSongsOnPlaylist != null){
+            this.allSongsOnPlaylist = allSongsOnPlaylist;
+        }
+    }
+
+    public ObservableList<Song> getAllSongsOnPlaylist(){
+        return allSongsOnPlaylist;
+    }
 }

@@ -62,11 +62,12 @@ public class Song {
     {
         double seconds = mediaPlayer.getTotalDuration().toSeconds();
 
-        double secs = seconds % 60;
+        double sec = seconds % 60;
         double minutes = (seconds / 60) % 60;
 
-        return String.format("%d:%02d", (int)minutes, (int)secs);
+        return String.format("%d:%02d", (int)minutes, (int)sec);
     }
+
 
     public void setId(int id) {
         this.id = id;

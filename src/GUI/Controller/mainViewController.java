@@ -18,7 +18,6 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -33,8 +32,10 @@ public class mainViewController implements Initializable {
     private MediaPlayer mediaPlayer;
     private Duration pausedTime;
     private Timer timer;
-
+    private boolean playing;
     private TimerTask timerTask;
+    @FXML
+    private Button btnPlayPause;
     @FXML
     private BorderPane borderPane;
     @FXML
@@ -44,11 +45,12 @@ public class mainViewController implements Initializable {
     @FXML
     private TextField txtSongSearch;
     @FXML
-    public Label lblCurrentSong, lblCurrentArtist;
-
+    private Label lblCurrentSong, lblCurrentArtist, lblSongCurrent, lblSongEnd;
     private MyTunesModel model;
     private browseViewController browseController;
     private playlistController playlistController;
+    private List<Song> songList;
+    private Song song;
 
     public mainViewController() {
         try {
@@ -62,9 +64,7 @@ public class mainViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         tblPlaylists.setItems(model.getObservablePlaylists());
-
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
-
         //Tillad edits i columns
         tblPlaylists.setEditable(true);
     }
@@ -77,7 +77,6 @@ public class mainViewController implements Initializable {
                 double current = mediaPlayer.getCurrentTime().toSeconds();
                 double end = mediaPlayer.getMedia().getDuration().toSeconds();
                 songBar.setProgress(current / end);
-
                 if (current / end == 1) {
                     cancelTimer();
                 }
@@ -91,17 +90,38 @@ public class mainViewController implements Initializable {
         timer.cancel();
     }
 
+    /**
+     * Begynder at få label til at tælle op så man kan se hvor langt i sangen man er.
+     */
+    public void beginLblTimer(){
+        mediaPlayer.currentTimeProperty().addListener((observable, oldTime, newTime) -> {
+            lblSongCurrent.setText(getCurrentTime());
+        });
+    }
+
+    public String getCurrentTime(){
+        double seconds = mediaPlayer.getCurrentTime().toSeconds();
+
+        double sec = seconds % 60;
+        double minutes = (seconds/60) % 60;
+
+        return String.format("%d:%02d",(int)minutes, (int)sec);
+    }
+
     public void play(Song song) {
         File file = new File(song.getFilePath());
         stop(mediaPlayer);
 
         if (file != null) {
+            setSongName(song);
             beginTimer();
             Media media = new Media(file.toURI().toString());
             mediaPlayer = new MediaPlayer(media);
             mediaPlayer.setVolume(volumeSlider.getValue() * 0.01);
-            mediaPlayer.setOnEndOfMedia(() -> stop(mediaPlayer));
+            mediaPlayer.setOnEndOfMedia(this::nextSong);
             mediaPlayer.play();
+            lblSongEnd.setText(model.getSong().getPlayTime());
+            beginLblTimer();
         }
     }
 
@@ -118,21 +138,62 @@ public class mainViewController implements Initializable {
         }
     }
 
+    public void nextSong(){
+        songList = model.getAllSongsOnPlaylist();
 
-    public void clickPlaySong(ActionEvent actionEvent) {
-        if (borderPane.getCenter().getId().equals("browse")) {
-            browseController.setSelectedSong();
-            Song song = model.getSong();
-            setSongName(song);
-            songPlay(song);
-        } else {
-            playlistController.setSelectedSong();
-            Song song = model.getSong();
-            setSongName(song);
-            songPlay(song);
+        int curIndex = songList.indexOf(song);
+        Song nextSong;
+
+        if(curIndex == songList.size() - 1) {
+            curIndex = 0;
+            nextSong = songList.get(curIndex);
         }
+        else
+            nextSong = songList.get(curIndex + 1);
+
+        song = nextSong;
+        play(song);
     }
 
+    public void prevSong(){
+        songList = model.getAllSongsOnPlaylist();
+
+        int curIndex = songList.indexOf(song);
+        Song nextSong;
+
+        if(curIndex == 0) {
+            curIndex = songList.size() - 1;
+            nextSong = songList.get(curIndex);
+        }
+        else
+            nextSong = songList.get(curIndex - 1);
+
+        song = nextSong;
+        play(song);
+    }
+
+    public void clickNextSong(ActionEvent actionEvent) throws Exception {
+        nextSong();
+    }
+
+    public void clickPrevSong(ActionEvent actionEvent) {
+        prevSong();
+    }
+
+    public void clickPlaySong(ActionEvent actionEvent) {
+        if(!playing){
+            song = model.getSong();
+            songPlay(song);
+            playing = true;
+            btnPlayPause.setText("Pause");
+        }
+        else if(playing){
+            cancelTimer();
+            pause(mediaPlayer);
+            playing = false;
+            btnPlayPause.setText("Play");
+        }
+    }
 
     public void songPlay(Song song) {
         //selectedSong er markeret fra listen og dens path gemmes til songPath
@@ -147,7 +208,6 @@ public class mainViewController implements Initializable {
                 mediaPathString = mediaPathString.replace("%20", " "); //io.file erstatter spaces med "%20" så her erstattes det med " "
                 mediaPathString = mediaPathString.substring(mediaPathString.indexOf("data")); //Skør måde at lave relative path.
                 Path mediaPath = Paths.get(mediaPathString).normalize();
-
                 //Fortsætter paused sang.
                 if (mediaPath.equals(songPath)) {
                     mediaPlayer.seek(pausedTime);
@@ -158,16 +218,6 @@ public class mainViewController implements Initializable {
             }
         }
     }
-
-    public void clickPauseSong(ActionEvent actionEvent) {
-        cancelTimer();
-        pause(mediaPlayer);
-    }
-
-    public void clickStopSong(ActionEvent actionEvent) {
-        stop(mediaPlayer);
-    }
-
 
     public void clickNewPlaylist(ActionEvent actionEvent) {
         try {

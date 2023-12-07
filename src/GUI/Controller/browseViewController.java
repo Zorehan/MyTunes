@@ -44,6 +44,7 @@ public class browseViewController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         tblSongs.setItems(model.getObservableSongs());
+        model.setPlaylistSongs(model.getObservableSongs());
         colTitle.setCellValueFactory(new PropertyValueFactory<>("name"));
         colArtist.setCellValueFactory(new PropertyValueFactory<>("artist"));
         colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
