@@ -19,7 +19,7 @@
             <Button fx:id="btnBrowse" mnemonicParsing="false" onAction="#clickBrowse" prefHeight="80.0" prefWidth="266.0" text="Browse" />
             <TableView fx:id="tblPlaylists" onMouseClicked="#clickOpenPlaylist" prefHeight="558.0" prefWidth="266.0" style="-fx-background-radius: 5;" stylesheets="@../style/mainViewStyle.css">
                <columns>
-                  <TableColumn fx:id="colName" prefWidth="195.0" text="Playlist" />
+                  <TableColumn fx:id="colName" onEditCommit="#editPlaylistName" prefWidth="195.0" text="Playlist" />
                   <TableColumn prefWidth="70.0" text="Songs" />
                </columns>
             </TableView>
